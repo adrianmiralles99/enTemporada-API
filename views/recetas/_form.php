@@ -16,11 +16,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tipo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'datos')->textarea(['rows' => 6]) ?>
-
     <?= $form->field($model, 'fecha')->textInput() ?>
 
     <?= $form->field($model, 'id_prodp')->textInput() ?>
+
+    <?= $form->field($model, 'estado')->dropDownList([ 'P' => 'P', 'A' => 'A', ], ['prompt' => '']) ?>
+
+    <?= $form->field($model, 'imagen')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tiempo')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'comensales')->textInput() ?>
+
+    <?= $form->field($model, 'dificultad')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'ingredientes')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'pasos')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

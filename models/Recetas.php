@@ -10,14 +10,23 @@ use Yii;
  * @property int $id
  * @property int $id_usuario
  * @property string $tipo
- * @property string $datos
  * @property string $fecha
  * @property int $id_prodp
+ * @property string $estado
+ * @property string $imagen
+ * @property string $titulo
+ * @property string $tiempo
+ * @property int $comensales
+ * @property string $dificultad
+ * @property string $ingredientes
+ * @property string $pasos
  *
  * @property Favoritos[] $favoritos
+ * @property Favoritos[] $favoritos0
  * @property Likes[] $likes
  * @property Producto $prodp
  * @property Usuarios $usuario
+ * @property Usuarios $usuario0
  */
 class Recetas extends \yii\db\ActiveRecord
 {
@@ -35,12 +44,16 @@ class Recetas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario', 'tipo', 'datos', 'id_prodp'], 'required'],
-            [['id_usuario', 'id_prodp'], 'integer'],
-            [['datos'], 'string'],
+            [['id_usuario', 'tipo', 'id_prodp', 'estado', 'imagen', 'titulo', 'tiempo', 'comensales', 'dificultad', 'ingredientes', 'pasos'], 'required'],
+            [['id_usuario', 'id_prodp', 'comensales'], 'integer'],
             [['fecha'], 'safe'],
-            [['tipo'], 'string', 'max' => 20],
+            [['estado', 'ingredientes', 'pasos'], 'string'],
+            [['tipo', 'dificultad'], 'string', 'max' => 20],
+            [['imagen'], 'string', 'max' => 40],
+            [['titulo'], 'string', 'max' => 30],
+            [['tiempo'], 'string', 'max' => 10],
             [['id_prodp'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['id_prodp' => 'id']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
@@ -54,9 +67,16 @@ class Recetas extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_usuario' => 'Id Usuario',
             'tipo' => 'Tipo',
-            'datos' => 'Datos',
             'fecha' => 'Fecha',
             'id_prodp' => 'Id Prodp',
+            'estado' => 'Estado',
+            'imagen' => 'Imagen',
+            'titulo' => 'Titulo',
+            'tiempo' => 'Tiempo',
+            'comensales' => 'Comensales',
+            'dificultad' => 'Dificultad',
+            'ingredientes' => 'Ingredientes',
+            'pasos' => 'Pasos',
         ];
     }
 
@@ -67,7 +87,17 @@ class Recetas extends \yii\db\ActiveRecord
      */
     public function getFavoritos()
     {
-        return $this->hasMany(Favoritos::className(), ['ud_receta' => 'id']);
+        return $this->hasMany(Favoritos::className(), ['id_receta' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Favoritos0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFavoritos0()
+    {
+        return $this->hasMany(Favoritos::className(), ['id_receta' => 'id']);
     }
 
     /**
@@ -96,6 +126,16 @@ class Recetas extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getUsuario()
+    {
+        return $this->hasOne(Usuarios::className(), ['id' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Usuario0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuario0()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'id_usuario']);
     }

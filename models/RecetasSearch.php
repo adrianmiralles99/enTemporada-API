@@ -17,8 +17,8 @@ class RecetasSearch extends Recetas
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_prodp'], 'integer'],
-            [['tipo', 'datos', 'fecha'], 'safe'],
+            [['id', 'id_usuario', 'id_prodp', 'comensales'], 'integer'],
+            [['tipo', 'fecha', 'estado', 'imagen', 'titulo', 'tiempo', 'dificultad', 'ingredientes', 'pasos'], 'safe'],
         ];
     }
 
@@ -62,10 +62,17 @@ class RecetasSearch extends Recetas
             'id_usuario' => $this->id_usuario,
             'fecha' => $this->fecha,
             'id_prodp' => $this->id_prodp,
+            'comensales' => $this->comensales,
         ]);
 
         $query->andFilterWhere(['like', 'tipo', $this->tipo])
-            ->andFilterWhere(['like', 'datos', $this->datos]);
+            ->andFilterWhere(['like', 'estado', $this->estado])
+            ->andFilterWhere(['like', 'imagen', $this->imagen])
+            ->andFilterWhere(['like', 'titulo', $this->titulo])
+            ->andFilterWhere(['like', 'tiempo', $this->tiempo])
+            ->andFilterWhere(['like', 'dificultad', $this->dificultad])
+            ->andFilterWhere(['like', 'ingredientes', $this->ingredientes])
+            ->andFilterWhere(['like', 'pasos', $this->pasos]);
 
         return $dataProvider;
     }

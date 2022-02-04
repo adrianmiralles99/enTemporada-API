@@ -32,9 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'id_usuario',
             'tipo',
-            'datos:ntext',
             'fecha',
             'id_prodp',
+            'estado',
+            'imagen',
+            'titulo',
+            'tiempo',
+            'comensales',
+            'dificultad',
+            'ingredientes:ntext',
+            'pasos:ntext',
         ],
     ]) ?>
 

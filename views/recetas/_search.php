@@ -21,11 +21,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tipo') ?>
 
-    <?= $form->field($model, 'datos') ?>
-
     <?= $form->field($model, 'fecha') ?>
 
-    <?php // echo $form->field($model, 'id_prodp') ?>
+    <?= $form->field($model, 'id_prodp') ?>
+
+    <?php // echo $form->field($model, 'estado') ?>
+
+    <?php // echo $form->field($model, 'imagen') ?>
+
+    <?php // echo $form->field($model, 'titulo') ?>
+
+    <?php // echo $form->field($model, 'tiempo') ?>
+
+    <?php // echo $form->field($model, 'comensales') ?>
+
+    <?php // echo $form->field($model, 'dificultad') ?>
+
+    <?php // echo $form->field($model, 'ingredientes') ?>
+
+    <?php // echo $form->field($model, 'pasos') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
