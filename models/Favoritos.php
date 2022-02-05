@@ -9,9 +9,10 @@ use Yii;
  *
  * @property int $id
  * @property int $id_usuario
- * @property int $ud_receta
+ * @property int $id_receta
  *
- * @property Recetas $udReceta
+ * @property Recetas $receta
+ * @property Recetas $receta0
  * @property Usuarios $usuario
  */
 class Favoritos extends \yii\db\ActiveRecord
@@ -30,10 +31,11 @@ class Favoritos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario', 'ud_receta'], 'required'],
-            [['id_usuario', 'ud_receta'], 'integer'],
+            [['id_usuario', 'id_receta'], 'required'],
+            [['id_usuario', 'id_receta'], 'integer'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
-            [['ud_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::className(), 'targetAttribute' => ['ud_receta' => 'id']],
+            [['id_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::className(), 'targetAttribute' => ['id_receta' => 'id']],
+            [['id_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::className(), 'targetAttribute' => ['id_receta' => 'id']],
         ];
     }
 
@@ -45,18 +47,28 @@ class Favoritos extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_usuario' => 'Id Usuario',
-            'ud_receta' => 'Ud Receta',
+            'id_receta' => 'Id Receta',
         ];
     }
 
     /**
-     * Gets query for [[UdReceta]].
+     * Gets query for [[Receta]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUdReceta()
+    public function getReceta()
     {
-        return $this->hasOne(Recetas::className(), ['id' => 'ud_receta']);
+        return $this->hasOne(Recetas::className(), ['id' => 'id_receta']);
+    }
+
+    /**
+     * Gets query for [[Receta0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReceta0()
+    {
+        return $this->hasOne(Recetas::className(), ['id' => 'id_receta']);
     }
 
     /**
