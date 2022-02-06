@@ -3,7 +3,7 @@ return  [
     [
         'class' => 'yii\rest\UrlRule',
         'pluralize' => false,
-        'controller' => ['usuarios', 'calendario', 'likes', 'recetas', 'producto','temporadaprod'],
+        'controller' => ['usuarios', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', 'temporadaprod'],
     ],
     [
         'class' => 'yii\rest\UrlRule',
