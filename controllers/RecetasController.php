@@ -3,14 +3,13 @@
 namespace app\controllers;
 
 use app\models\Recetas;
-use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\filters\auth\HttpBearerAuth;
 
 /**
  * RecetasController implements the CRUD actions for Recetas model.
  */
-class RecetasController extends ActiveController
+class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
 

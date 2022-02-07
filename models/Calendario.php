@@ -7,19 +7,10 @@ use Yii;
 /**
  * This is the model class for table "calendario".
  *
+ * @property int $id_calendario
  * @property int $id_prod
- * @property string $enero
- * @property string $febrero
- * @property string $marzo
- * @property string $abril
- * @property string $mayo
- * @property string $junio
- * @property string $julio
- * @property string $agosto
- * @property string $septiembre
- * @property string $octubre
- * @property string $noviembre
- * @property string $diciembre
+ * @property int $mes
+ * @property string $estado
  *
  * @property Producto $prod
  */
@@ -39,10 +30,10 @@ class Calendario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_prod', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], 'required'],
-            [['id_prod'], 'integer'],
-            [['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], 'string'],
-            [['id_prod'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['id_prod' => 'id']],
+            [['id_prod', 'mes', 'estado'], 'required'],
+            [['id_prod', 'mes'], 'integer'],
+            [['estado'], 'string'],
+            [['id_prod'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::class, 'targetAttribute' => ['id_prod' => 'id']],
         ];
     }
 
@@ -52,19 +43,10 @@ class Calendario extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id_calendario' => 'Id Calendario',
             'id_prod' => 'Id Prod',
-            'enero' => 'Enero',
-            'febrero' => 'Febrero',
-            'marzo' => 'Marzo',
-            'abril' => 'Abril',
-            'mayo' => 'Mayo',
-            'junio' => 'Junio',
-            'julio' => 'Julio',
-            'agosto' => 'Agosto',
-            'septiembre' => 'Septiembre',
-            'octubre' => 'Octubre',
-            'noviembre' => 'Noviembre',
-            'diciembre' => 'Diciembre',
+            'mes' => 'Mes',
+            'estado' => 'Estado',
         ];
     }
 
@@ -75,6 +57,12 @@ class Calendario extends \yii\db\ActiveRecord
      */
     public function getProd()
     {
-        return $this->hasOne(Producto::className(), ['id' => 'id_prod']);
+        return $this->hasOne(Producto::class, ['id' => 'id_prod']);
+    }
+
+
+    public function extraFields()
+    {
+        return ['prod'];
     }
 }

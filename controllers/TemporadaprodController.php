@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 /**
  * TemporadaprodController implements the CRUD actions for Likes model.
  */
-class TemporadaprodController extends ActiveController
+class TemporadaprodController extends BaseController
 {
     public $modelClass = 'app\models\Temporadaprod';
 

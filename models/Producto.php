@@ -82,5 +82,4 @@ class Producto extends \yii\db\ActiveRecord
     }
 
 
-    // expand -> extrafield
 }

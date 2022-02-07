@@ -9,5 +9,5 @@ use yii\rest\ActiveController;
  */
 class CalendarioController extends ActiveController
 {
-    public $modelClass = 'app\models\Usuarios';
+    public $modelClass = 'app\models\Calendario';
 }

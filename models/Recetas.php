@@ -22,14 +22,14 @@ use Yii;
  * @property string $pasos
  *
  * @property Favoritos[] $favoritos
- * @property Favoritos[] $favoritos0
  * @property Likes[] $likes
  * @property Producto $prodp
  * @property Usuarios $usuario
- * @property Usuarios $usuario0
  */
 class Recetas extends \yii\db\ActiveRecord
 {
+
+    
     /**
      * {@inheritdoc}
      */
@@ -52,9 +52,8 @@ class Recetas extends \yii\db\ActiveRecord
             [['imagen'], 'string', 'max' => 40],
             [['titulo'], 'string', 'max' => 30],
             [['tiempo'], 'string', 'max' => 10],
-            [['id_prodp'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['id_prodp' => 'id']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_prodp'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::class, 'targetAttribute' => ['id_prodp' => 'id']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
 
@@ -87,17 +86,7 @@ class Recetas extends \yii\db\ActiveRecord
      */
     public function getFavoritos()
     {
-        return $this->hasMany(Favoritos::className(), ['id_receta' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Favoritos0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFavoritos0()
-    {
-        return $this->hasMany(Favoritos::className(), ['id_receta' => 'id']);
+        return $this->hasMany(Favoritos::class, ['id_receta' => 'id']);
     }
 
     /**
@@ -107,7 +96,7 @@ class Recetas extends \yii\db\ActiveRecord
      */
     public function getLikes()
     {
-        return $this->hasMany(Likes::className(), ['id_receta' => 'id']);
+        return $this->hasMany(Likes::class, ['id_receta' => 'id']);
     }
 
     /**
@@ -117,7 +106,7 @@ class Recetas extends \yii\db\ActiveRecord
      */
     public function getProdp()
     {
-        return $this->hasOne(Producto::className(), ['id' => 'id_prodp']);
+        return $this->hasOne(Producto::class, ['id' => 'id_prodp']);
     }
 
     /**
@@ -127,16 +116,6 @@ class Recetas extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'id_usuario']);
-    }
-
-    /**
-     * Gets query for [[Usuario0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsuario0()
-    {
-        return $this->hasOne(Usuarios::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuarios::class, ['id' => 'id_usuario']);
     }
 }

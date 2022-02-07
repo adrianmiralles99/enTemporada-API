@@ -14,6 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_prod')->textInput() ?>
 
+    <?= $form->field($model, 'mes')->textInput() ?>
+
+    <?= $form->field($model, 'estado')->dropDownList([ 'T' => 'T', 'I' => 'I', 'F' => 'F', 'N' => 'N', 'B' => 'B', ], ['prompt' => '']) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
