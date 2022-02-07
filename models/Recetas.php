@@ -118,4 +118,5 @@ class Recetas extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Usuarios::class, ['id' => 'id_usuario']);
     }
+
 }

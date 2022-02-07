@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Recetas;
 use yii\data\ActiveDataProvider;
 use yii\filters\auth\HttpBearerAuth;
@@ -12,15 +13,13 @@ use yii\filters\auth\HttpBearerAuth;
 class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
+    public $except = ["index", "view"];
 
-    public function behaviors()
+
+
+    public function actionRelacionadas()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::class,
-            'except' => ['view', 'index'],
-        ];
-        return $behaviors;
+        return Yii::$app->db->createcommand('select * from producto')->queryAll();
     }
 
     public function indexProvider()

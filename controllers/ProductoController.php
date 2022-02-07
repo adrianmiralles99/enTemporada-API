@@ -14,7 +14,8 @@ use app\models\Producto;
 class ProductoController extends BaseController
 {
     public $modelClass = 'app\models\Producto';
-    public $authenable = false;
+    // public $except = ["index", "view"];
+
 
     public function indexProvider()
     {
