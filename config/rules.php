@@ -13,6 +13,15 @@ return  [
             'POST authenticate' => 'authenticate',
             'OPTIONS authenticate' => 'authenticate',
         ]
-    ]
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['recetas'],
+        'pluralize' => false,
+        'extraPatterns' => [
+            'OPTIONS relacionadas' => 'relacionadas',
+            'GET relacionadas' => 'relacionadas'
+        ]
+    ],
 
 ];

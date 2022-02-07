@@ -65,4 +65,33 @@ class Calendario extends \yii\db\ActiveRecord
     {
         return ['prod'];
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+        $trans= Yii:$app->db-<beginTransaction();
+        try{
+            commandos SQL
+            $trans->commit();
+        }Exception{
+            Deshace los sql realicado con anterioridad en el momento que de error
+            $trans->rollback();
+        }
+    */
 }

@@ -81,5 +81,12 @@ class Producto extends \yii\db\ActiveRecord
         return parent::afterFind();
     }
 
+    public function getRelacionadas()
+    {
+        return Yii::$app->db->createcommand("select * from recetas where '$this->id' ")->queryAll();
+    }
 
+    public function extraFields()
+    {
+    }
 }
