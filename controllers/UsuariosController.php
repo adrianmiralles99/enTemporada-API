@@ -12,7 +12,7 @@ use yii\filters\auth\HttpBearerAuth;
 class UsuariosController extends BaseController
 {
     public $modelClass = 'app\models\Usuarios';
-
+    public $except = ["index", "view"];
     public function actionAuthenticate()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

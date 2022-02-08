@@ -11,7 +11,7 @@ class BaseController extends ActiveController
 {
     public $enableCsrfValidation = false;
     public $authenable = true;
-    public $except = [];
+    public $except = ["index", "view"];
 
     public function beforeAction($a)
     {

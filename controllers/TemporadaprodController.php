@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
 class TemporadaprodController extends BaseController
 {
     public $modelClass = 'app\models\Temporadaprod';
-
+    public $except = ["index", "view"];
     public function indexProvider()
     {
         return new ActiveDataProvider([

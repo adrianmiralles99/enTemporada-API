@@ -22,6 +22,6 @@ return  [
             'OPTIONS relacionadas' => 'relacionadas',
             'GET relacionadas' => 'relacionadas'
         ]
-    ],
+    ]  
 
 ];
