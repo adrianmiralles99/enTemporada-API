@@ -29,7 +29,7 @@ use Yii;
 class Recetas extends \yii\db\ActiveRecord
 {
 
-    
+
     /**
      * {@inheritdoc}
      */
@@ -119,4 +119,14 @@ class Recetas extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::class, ['id' => 'id_usuario']);
     }
 
+
+    public function getNick()
+    {
+        return Yii::$app->db->createcommand("select nick from usuarios where id= '$this->id' ")->queryOne();
+    }
+
+    public function extraFields()
+    {
+        return ["nick"];
+    }
 }

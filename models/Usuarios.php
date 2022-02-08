@@ -160,7 +160,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             $fecha = date('Y-m-d');
             $nuevafecha = strtotime('+1 month', strtotime($fecha));
             $nuevafecha = date('Y-m-d', $nuevafecha);
-            
+
             $usuario->fecha_cad = $nuevafecha;
 
             $usuario->save();
@@ -173,6 +173,9 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return $this->password === md5($password); // Si se utiliza otra función de encriptación distinta a md5, habrá que cambiar esta línea
     }
+
+
+
 
     public function getTipoText()
     {
