@@ -83,10 +83,14 @@ class Producto extends \yii\db\ActiveRecord
 
     public function getRelacionadas()
     {
-        return Yii::$app->db->createcommand("select * from recetas where '$this->id' ")->queryAll();
+        return Yii::$app->db->createcommand("select usuarios.nick, usuarios.imagen as user_imagen, recetas.imagen, recetas.id,titulo, count(*) as contador from likes join 
+        recetas join usuarios where recetas.id=id_receta and id_prodp='$this->id' and recetas.id_usuario=usuarios.id 
+        group by recetas.id order by contador asc limit 3;")->queryAll();
     }
+
 
     public function extraFields()
     {
+        return ["relacionadas"];
     }
 }

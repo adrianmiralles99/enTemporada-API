@@ -14,7 +14,7 @@ use app\models\Producto;
 class ProductoController extends BaseController
 {
     public $modelClass = 'app\models\Producto';
-    // public $except = ["index", "view"];
+    public $except = ["index", "view"];
 
 
     public function indexProvider()
@@ -34,3 +34,8 @@ class ProductoController extends BaseController
         return $actions;
     }
 }
+// select recetas.id,titulo,id_receta, count(*) as contador from likes join recetas 
+// where recetas.id=id_receta 
+// group by recetas.id 
+// order by contador desc 
+// limit 3;

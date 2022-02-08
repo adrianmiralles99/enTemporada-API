@@ -16,12 +16,6 @@ class RecetasController extends BaseController
     public $except = ["index", "view"];
 
 
-
-    public function actionRelacionadas()
-    {
-        return Yii::$app->db->createcommand('select * from producto')->queryAll();
-    }
-
     public function indexProvider()
     {
         return new ActiveDataProvider([
@@ -29,6 +23,7 @@ class RecetasController extends BaseController
             'pagination' => false
         ]);
     }
+
 
     public function actions()
     {
