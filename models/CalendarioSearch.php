@@ -17,7 +17,7 @@ class CalendarioSearch extends Calendario
     public function rules()
     {
         return [
-            [['id_calendario', 'id_prod', 'mes'], 'integer'],
+            [['id', 'id_prod', 'mes'], 'integer'],
             [['estado'], 'safe'],
         ];
     }
@@ -58,7 +58,7 @@ class CalendarioSearch extends Calendario
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_calendario' => $this->id_calendario,
+            'id' => $this->id,
             'id_prod' => $this->id_prod,
             'mes' => $this->mes,
         ]);
