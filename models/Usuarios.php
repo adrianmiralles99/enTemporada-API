@@ -22,14 +22,17 @@ use app\models\Favoritos;
  * @property string $direccion
  * @property string $tipo
  * @property string $estado
- * @property string $token
- * @property date $fecha_cad
+ * @property string|null $token
+ * @property string|null $fecha_cad
+ * @property int|null $exp
+ * @property int|null $id_ultima_receta
  *
  * @property Favoritos[] $favoritos
  * @property Likes[] $likes
  * @property Recetas[] $recetas
  * @property Recetas[] $recetas0
  */
+
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     static $tipoUsuarios = ["U" => "Usuario",  "A" => "Administrdor"];
@@ -48,15 +51,15 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     public function rules()
     {
         return [
-            [['nombre', 'apellidos', 'nick', 'correo', 'password', 'imagen', 'descripcion', 'localidad', 'direccion', 'tipo', 'estado', 'token', 'fecha_cad'], 'required'],
+            [['nombre', 'apellidos', 'nick', 'correo', 'password', 'localidad', 'direccion', 'tipo', 'estado'], 'required'],
             [['descripcion', 'tipo', 'estado'], 'string'],
+            [['fecha_cad', 'imagen'], 'safe'],
+            [['exp', 'id_ultima_receta'], 'integer'],
             [['nombre', 'localidad'], 'string', 'max' => 20],
-            [['apellidos', 'imagen'], 'string', 'max' => 40],
+            [['apellidos', 'imagen', 'token'], 'string', 'max' => 40],
             [['nick'], 'string', 'max' => 12],
             [['correo', 'direccion'], 'string', 'max' => 50],
             [['password'], 'string', 'max' => 32],
-            [['token'], 'string', 'max' => 40],
-            [['fecha_cad'], 'date', 'max' => 32],
         ];
     }
 
@@ -81,7 +84,9 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             'tipo' => 'Tipo',
             'estado' => 'Estado',
             'token' => 'Token',
-            'fecha_cad' => 'Fecha Caducidad',
+            'fecha_cad' => 'Fecha Cad',
+            'exp' => 'Exp',
+            'id_ultima_receta' => 'Id Ultima Receta',
         ];
     }
 
@@ -173,9 +178,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return $this->password === md5($password); // Si se utiliza otra función de encriptación distinta a md5, habrá que cambiar esta línea
     }
-
-
-
 
     public function getTipoText()
     {

@@ -3,7 +3,7 @@ return  [
     [
         'class' => 'yii\rest\UrlRule',
         'pluralize' => false,
-        'controller' => ['usuarios', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', 'temporadaprod'],
+        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', 'temporadaprod'],
     ],
     [
         'class' => 'yii\rest\UrlRule',
@@ -12,6 +12,8 @@ return  [
         'extraPatterns' => [
             'POST authenticate' => 'authenticate',
             'OPTIONS authenticate' => 'authenticate',
+            'POST register' => 'register',
+            'OPTIONS register' => 'register',
         ]
     ],
     [
