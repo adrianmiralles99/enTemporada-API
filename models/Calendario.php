@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "calendario".
  *
- * @property int $id_calendario
+ * @property int $id
  * @property int $id_prod
  * @property int $mes
  * @property string $estado
@@ -43,7 +43,7 @@ class Calendario extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_calendario' => 'Id Calendario',
+            'id' => 'Id Calendario',
             'id_prod' => 'Id Prod',
             'mes' => 'Mes',
             'estado' => 'Estado',

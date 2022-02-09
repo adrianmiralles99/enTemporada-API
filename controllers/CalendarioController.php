@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Calendario;
 use yii\rest\ActiveController;
+use yii\data\ActiveDataProvider;
 use app\controllers\BaseController;
 
 /**
@@ -12,7 +14,7 @@ class CalendarioController extends BaseController
 {
     public $modelClass = 'app\models\Calendario';
     public $except = ["index", "view"];
-    
+
     public function indexProvider()
     {
         return new ActiveDataProvider([
@@ -20,7 +22,7 @@ class CalendarioController extends BaseController
             'pagination' => false
         ]);
     }
-    
+
     public function actions()
     {
         $actions = parent::actions();

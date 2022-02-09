@@ -11,7 +11,7 @@ class BaseController extends ActiveController
 {
     public $enableCsrfValidation = false;
     public $authenable = true;
-    public $except = ["index", "view"];
+    public $except = [];
 
     public function beforeAction($a)
     {
@@ -38,7 +38,7 @@ class BaseController extends ActiveController
             return $behaviors;
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::class,
-            'except' => array_merge(['options', 'authenticate'], $this->except),
+            'except' => array_merge(['options'], $this->except),
         ];
 
         return $behaviors;
