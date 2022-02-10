@@ -60,7 +60,7 @@ class Producto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCalendarios()
+    public function getCalendario()
     {
         return $this->hasMany(Calendario::class, ['id_prod' => 'id']);
     }
@@ -89,8 +89,9 @@ class Producto extends \yii\db\ActiveRecord
     }
 
 
+
     public function extraFields()
     {
-        return ["relacionadas"];
+        return ["relacionadas", "calendario"];
     }
 }
