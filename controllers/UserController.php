@@ -51,19 +51,6 @@ class UserController extends BaseController
         } else {
             return ["error" => $model->getErrors()];
         }
-
-
-
-        // $nick = $_POST["nick"];
-        // $nombre = $_POST["nombre"];
-        // $apellidos = $_POST["apellidos"];
-        // $localidad = $_POST["localidad"];
-        // $direccion = $_POST["direccion"];
-        // $correo = $_POST["correo"];
-        // $password = $_POST["password"];
-        // var_dump($_POST);
-
-        // Yii::$app->db->createcommand("insert into usuarios (nick, password, direccion,localidad,nombre,apellidos,correo) values ('$nick')")->queryAll();
     }
 }
 // 'nick' => string 'Manolo' (length=6)

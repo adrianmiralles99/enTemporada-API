@@ -6,21 +6,22 @@ namespace app\controllers;
 use Yii;
 use yii\data\ActiveDataProvider;
 use app\controllers\BaseController;
-use app\models\Producto;
+use app\models\Prodactuales;
+use yii\db\ActiveRecord;
 
 /**
  * ProductoController implements the CRUD actions for Producto model.
  */
-class ProductoController extends BaseController
+class ProdactualesController extends BaseController
 {
-    public $modelClass = 'app\models\Producto';
+    public $modelClass = 'app\models\Prodactuales';
     public $except = ["index", "view"];
 
 
     public function indexProvider()
     {
         return new ActiveDataProvider([
-            'query' => Producto::find()->orderBy('id'),
+            'query' => Prodactuales::find()->orderBy('id'),
             'pagination' => false
         ]);
     }
@@ -33,10 +34,4 @@ class ProductoController extends BaseController
         $actions['index']['prepareDataProvider'] = [$this, 'indexProvider'];
         return $actions;
     }
-
 }
-// select recetas.id,titulo,id_receta, count(*) as contador from likes join recetas 
-// where recetas.id=id_receta 
-// group by recetas.id 
-// order by contador desc 
-// limit 3;
