@@ -3,7 +3,7 @@ return  [
     [
         'class' => 'yii\rest\UrlRule',
         'pluralize' => false,
-        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto'],
+        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', "prodactuales"],
     ],
     [
         'class' => 'yii\rest\UrlRule',
@@ -16,14 +16,5 @@ return  [
             'OPTIONS register' => 'register',
         ]
     ],
-    [
-        'class' => 'yii\rest\UrlRule',
-        'controller' => ['recetas'],
-        'pluralize' => false,
-        'extraPatterns' => [
-            'OPTIONS relacionadas' => 'relacionadas',
-            'GET relacionadas' => 'relacionadas'
-        ]
-    ]  
 
 ];
