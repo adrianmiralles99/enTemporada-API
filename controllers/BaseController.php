@@ -34,12 +34,11 @@ class BaseController extends ActiveController
                 'Access-Control-Max-Age' => 86400
             ],
         ];
-        if (!$this->authenable)
-            return $behaviors;
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::class,
-            'except' => array_merge(['options'], $this->except),
-        ];
+        if ($this->authenable)
+            $behaviors['authenticator'] = [
+                'class' => HttpBearerAuth::class,
+                'except' => array_merge(['options'], $this->except),
+            ];
 
         return $behaviors;
     }
