@@ -129,4 +129,19 @@ class Recetas extends \yii\db\ActiveRecord
     {
         return ["nick"];
     }
+
+    public function afterFind()
+    {
+        $this->ingredientes = json_decode($this->ingredientes, true); //Los convertimos desde Json a array de datos
+        $this->pasos = json_decode($this->pasos, true); //Los convertimos desde Json a array de datos
+        return parent::afterFind();
+    }   
+
+    public function beforeSave($insert)
+    {
+        $this->ingredientes = json_encode($this->ingredientes); //Los convertimos a Json
+        $this->pasos = json_encode($this->pasos); //Los convertimos a Json
+
+        return parent::beforeSave($insert);
+    }
 }

@@ -16,5 +16,14 @@ return  [
             'OPTIONS register' => 'register',
         ]
     ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['recetas'],
+        'pluralize' => false,
+        'extraPatterns' => [
+            'POST authenticate' => 'crearReceta',
+            'OPTIONS authenticate' => 'crearReceta',
+        ]
+    ],
 
 ];
