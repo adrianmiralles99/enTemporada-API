@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Recetas;
 use yii\data\ActiveDataProvider;
-use yii\filters\auth\HttpBearerAuth;
 
 /**
  * RecetasController implements the CRUD actions for Recetas model.
@@ -13,7 +12,7 @@ use yii\filters\auth\HttpBearerAuth;
 class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
-    public $except = ["index", "view"];
+    public $except = ["index", "view", "crearreceta"];
 
 
     public function indexProvider()
@@ -33,4 +32,24 @@ class RecetasController extends BaseController
         $actions['index']['prepareDataProvider'] = [$this, 'indexProvider'];
         return $actions;
     }
+
+
+    public function actionCrearreceta()
+    {
+        $model = new Recetas();
+
+        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        $model->estado = "P";
+        $model->ingredientes = json_encode($model->ingredientes);
+        $model->pasos = json_encode($model->pasos);
+
+        if ($model->save()) {
+            return $model;
+        } else {
+            return ["error" => $model->getErrors()];
+        }
+     
+    }
+
+   
 }

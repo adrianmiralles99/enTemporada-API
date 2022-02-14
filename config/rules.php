@@ -21,8 +21,8 @@ return  [
         'controller' => ['recetas'],
         'pluralize' => false,
         'extraPatterns' => [
-            'POST authenticate' => 'crearReceta',
-            'OPTIONS authenticate' => 'crearReceta',
+            'POST crearreceta' => 'crearreceta',
+            'OPTIONS crearreceta' => 'crearreceta',
         ]
     ],
 
