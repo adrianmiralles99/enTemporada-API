@@ -3,10 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use yii\rest\ActiveController;
 use app\controllers\BaseController;
 use app\models\Usuarios;
-use yii\filters\auth\HttpBearerAuth;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -53,10 +51,3 @@ class UserController extends BaseController
         }
     }
 }
-// 'nick' => string 'Manolo' (length=6)
-//   'password' => string '1234' (length=4)
-//   'localidad' => string 'Valencia' (length=8)
-//   'direccion' => string 'AV/ Plata' (length=9)
-//   'nombre' => string 'ManGo Men' (length=9)
-//   'apellidos' => string 'Gomen' (length=5)
-//   'correo' => string 'gomen@mango.com' (length=15)

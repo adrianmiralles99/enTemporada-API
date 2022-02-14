@@ -7,7 +7,6 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use app\controllers\BaseController;
 use app\models\Prodactuales;
-use yii\db\ActiveRecord;
 
 /**
  * ProductoController implements the CRUD actions for Producto model.
@@ -16,6 +15,7 @@ class ProdactualesController extends BaseController
 {
     public $modelClass = 'app\models\Prodactuales';
     public $except = ["index", "view"];
+
 
 
     public function indexProvider()

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use phpDocumentor\Reflection\PseudoTypes\False_;
 use Yii;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
@@ -33,7 +34,6 @@ class BaseController extends ActiveController
                 'Access-Control-Max-Age' => 86400
             ],
         ];
-
         if (!$this->authenable)
             return $behaviors;
         $behaviors['authenticator'] = [

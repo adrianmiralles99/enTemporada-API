@@ -33,10 +33,4 @@ class ProductoController extends BaseController
         $actions['index']['prepareDataProvider'] = [$this, 'indexProvider'];
         return $actions;
     }
-
 }
-// select recetas.id,titulo,id_receta, count(*) as contador from likes join recetas 
-// where recetas.id=id_receta 
-// group by recetas.id 
-// order by contador desc 
-// limit 3;
