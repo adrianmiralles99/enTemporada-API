@@ -48,7 +48,6 @@ class RecetasController extends BaseController
         } else {
             return ["error" => $model->getErrors()];
         }
-     
     }
 
    
