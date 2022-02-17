@@ -3,8 +3,9 @@
 namespace app\controllers;
 
 use Yii;
-use app\controllers\BaseController;
 use app\models\Usuarios;
+use yii\web\NotFoundHttpException;
+use app\controllers\BaseController;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -40,6 +41,8 @@ class UserController extends BaseController
         $model = new Usuarios();
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        // var_dump($model);
+        return $model;
         $model->tipo = "U";
         $model->estado = "P";
         $model->exp = 0;
@@ -49,5 +52,21 @@ class UserController extends BaseController
         } else {
             return ["error" => $model->getErrors()];
         }
+    }
+
+    public function actionUpdateuser($id)
+    {
+        // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
+        $uid = Yii::$app->user->identity->id;
+        $model = Usuarios::findOne($id);
+        if ($uid != $model->id) //No es mío
+            throw new NotFoundHttpException('Acceso no permitido');
+
+        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        if ($model->save()) {
+            $response = Yii::$app->getResponse();
+            $response->setStatusCode(201);
+        }
+        return $model;
     }
 }

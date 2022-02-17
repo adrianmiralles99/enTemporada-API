@@ -52,6 +52,7 @@ class Recetas extends \yii\db\ActiveRecord
             [['imagen'], 'string', 'max' => 40],
             [['titulo'], 'string', 'max' => 30],
             [['tiempo'], 'string', 'max' => 10],
+            [['id'], 'integer'],
             [['id_prodp'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::class, 'targetAttribute' => ['id_prodp' => 'id']],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id']],
         ];

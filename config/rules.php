@@ -14,6 +14,8 @@ return  [
             'OPTIONS authenticate' => 'authenticate',
             'POST register' => 'register',
             'OPTIONS register' => 'register',
+            'PUT updateuser' => 'updateuser',
+            'OPTIONS updateuser' => 'updateuser',
         ]
     ],
     [
@@ -23,8 +25,8 @@ return  [
         'extraPatterns' => [
             'POST crearreceta' => 'crearreceta',
             'OPTIONS crearreceta' => 'crearreceta',
-            'POST saveimg' => 'saveimg',
-            'OPTIONS saveimg' => 'saveimg',
+            'PUT updatereceta' => 'updatereceta',
+            'OPTIONS updatereceta' => 'updatereceta',
         ]
     ],
 

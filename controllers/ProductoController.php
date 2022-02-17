@@ -6,6 +6,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use app\controllers\BaseController;
 use app\models\Producto;
+use app\models\Usuarios;
 
 /**
  * ProductoController implements the CRUD actions for Producto model.
@@ -13,7 +14,7 @@ use app\models\Producto;
 class ProductoController extends BaseController
 {
     public $modelClass = "app\models\Producto";
-    public $authexcept = ["index"];
+    public $authexcept = ["index", "cosita"];
 
 
     public function actions()
@@ -32,5 +33,12 @@ class ProductoController extends BaseController
             'query' => Producto::find()->orderBy('id'),
             'pagination' => false
         ]);
+    }
+
+    public function actionCosita()
+    {
+        $uid = Usuarios::findOne(2)->id;
+        var_dump($uid);
+        return null;
     }
 }

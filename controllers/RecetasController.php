@@ -5,6 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\Recetas;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
+use app\controllers\BaseController;
+use app\models\Usuarios;
 
 /**
  * RecetasController implements the CRUD actions for Recetas model.
@@ -50,7 +53,23 @@ class RecetasController extends BaseController
         }
     }
 
-    public function actionSaveimg()
+    public function actionUpdatereceta($id)
     {
+        // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
+        $uid = Yii::$app->user->identity->id;
+        $model = Recetas::findOne($id);
+        if (!$model) { //No existe
+            throw new NotFoundHttpException('No existe esa receta');
+        } else {
+            if ($uid != $model->id_usuario) //No es mío
+                throw new NotFoundHttpException('Acceso no permitido');
+
+            $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+            if ($model->save()) {
+                $response = Yii::$app->getResponse();
+                $response->setStatusCode(201);
+            }
+            return $model;
+        }
     }
 }
