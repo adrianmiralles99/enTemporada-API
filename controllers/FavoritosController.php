@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 /**
  * LikesController implements the CRUD actions for Favoritos model.
  */
-class FavoritosController extends BaseController
+class FavoritosController extends BaseController 
 {
     public $modelClass = 'app\models\Favoritos';
     public $authexcept = ["index"];

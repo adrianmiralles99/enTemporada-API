@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 /**
  * LikesController implements the CRUD actions for Likes model.
  */
-class LikesController extends BaseController
+class LikesController extends BaseController 
 {
     public $modelClass = 'app\models\Likes';
     public $authexcept = ["index"];
