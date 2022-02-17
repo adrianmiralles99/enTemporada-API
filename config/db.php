@@ -9,7 +9,7 @@ return [
     'username' => 'ninja',
     'password' => 'Fruitninjas_2022',
     'charset' => 'utf8',  
-
+ 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
     //'schemaCacheDuration' => 60,
