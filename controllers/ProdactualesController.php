@@ -15,7 +15,7 @@ class ProdactualesController extends BaseController
     public $modelClass = 'app\models\Prodactuales';
     public $authexcept = ["index"]; 
 
-
+ 
 
     public function actions()
     {
