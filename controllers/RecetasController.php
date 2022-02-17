@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
 class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
-    public $except = ["index", "view", "crearreceta"];
+    public $authexcept = ["index", "view", "crearreceta", "saveimg"];
 
 
     public function indexProvider()
@@ -40,8 +40,8 @@ class RecetasController extends BaseController
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         $model->estado = "P";
-        $model->ingredientes = json_encode($model->ingredientes);
-        $model->pasos = json_encode($model->pasos);
+        // $model->ingredientes = json_encode($model->ingredientes);
+        // $model->pasos = json_encode($model->pasos);
 
         if ($model->save()) {
             return $model;
@@ -50,5 +50,7 @@ class RecetasController extends BaseController
         }
     }
 
-   
+    public function actionSaveimg()
+    {
+    }
 }

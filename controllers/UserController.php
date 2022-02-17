@@ -12,7 +12,7 @@ use app\models\Usuarios;
 class UserController extends BaseController
 {
     public $modelClass = 'app\models\Usuarios';
-    public $except = ["create", "authenticate", "register"];
+    public $authexcept = ["create", "authenticate", "register"];
 
     public function actionAuthenticate()
     {

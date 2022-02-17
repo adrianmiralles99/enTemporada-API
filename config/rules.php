@@ -23,7 +23,11 @@ return  [
         'extraPatterns' => [
             'POST crearreceta' => 'crearreceta',
             'OPTIONS crearreceta' => 'crearreceta',
+            'POST saveimg' => 'saveimg',
+            'OPTIONS saveimg' => 'saveimg',
         ]
     ],
+
+
 
 ];

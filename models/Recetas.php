@@ -46,8 +46,8 @@ class Recetas extends \yii\db\ActiveRecord
         return [
             [['id_usuario', 'tipo', 'id_prodp', 'estado', 'imagen', 'titulo', 'tiempo', 'comensales', 'dificultad', 'ingredientes', 'pasos'], 'required'],
             [['id_usuario', 'id_prodp', 'comensales'], 'integer'],
-            [['fecha'], 'safe'],
-            [['estado', 'ingredientes', 'pasos'], 'string'],
+            [['fecha', 'ingredientes', 'pasos'], 'safe'],
+            [['estado'], 'string'],
             [['tipo', 'dificultad'], 'string', 'max' => 20],
             [['imagen'], 'string', 'max' => 40],
             [['titulo'], 'string', 'max' => 30],

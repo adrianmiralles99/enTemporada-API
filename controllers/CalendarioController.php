@@ -13,7 +13,7 @@ use app\controllers\BaseController;
 class CalendarioController extends BaseController
 {
     public $modelClass = 'app\models\Calendario';
-    public $except = ["index", "view"];
+    public $authexcept = ["index"];
 
     public function indexProvider()
     {
