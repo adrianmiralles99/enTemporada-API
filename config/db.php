@@ -8,7 +8,7 @@ return [
     'dsn' => 'mysql:host=alum3.iesfsl.org;dbname=enTemporada',
     'username' => 'ninja',
     'password' => 'Fruitninjas_2022',
-    'charset' => 'utf8', 
+    'charset' => 'utf8',  
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
