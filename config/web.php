@@ -49,15 +49,11 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
-            'rules' => array(
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-            ),
-        ],
+            'rules' => require(__DIR__ . '/rules.php')
+        ]
     ],
     'params' => $params,
 ];

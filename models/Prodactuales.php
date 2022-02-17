@@ -14,8 +14,6 @@ use Yii;
  * @property string $info_nut
  * @property string $tipo
  * @property string $color
- * 
- * @property Calendario[] $calendarios
  */
 class Prodactuales extends \yii\db\ActiveRecord
 {
@@ -45,6 +43,7 @@ class Prodactuales extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
     public function attributeLabels()
     {
         return [

@@ -5,7 +5,6 @@ namespace app\controllers;
 // use yii\rest\ActiveController;
 use Yii;
 use yii\data\ActiveDataProvider;
-use app\controllers\BaseController;
 use app\models\Prodactuales;
 
 /**
@@ -14,9 +13,19 @@ use app\models\Prodactuales;
 class ProdactualesController extends BaseController
 {
     public $modelClass = 'app\models\Prodactuales';
-    public $except = ["index", "view"];
+    public $authexcept = ["index"];
 
 
+
+    public function actions()
+    {
+        $actions = parent::actions();
+        //Eliminamos acciones de crear y eliminar apuntes. Eliminamos update para personalizarla
+        unset($actions['delete'], $actions['create'], $actions['update']);
+        // Redefinimos el método que prepara los datos en el index
+        $actions['index']['prepareDataProvider'] = [$this, 'indexProvider'];
+        return $actions;
+    }
 
     public function indexProvider()
     {
@@ -24,14 +33,5 @@ class ProdactualesController extends BaseController
             'query' => Prodactuales::find()->orderBy('id'),
             'pagination' => false
         ]);
-    }
-
-    public function actions()
-    {
-        $actions = parent::actions();
-        //Eliminamos acciones de crear y eliminar apuntes. Eliminamos update para personalizarla
-        unset($actions['delete'], $actions['create'], $actions['update']);
-        $actions['index']['prepareDataProvider'] = [$this, 'indexProvider'];
-        return $actions;
     }
 }
