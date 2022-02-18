@@ -15,7 +15,7 @@ use app\models\Usuarios;
 class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
-    public $authexcept = ["index", "view", "crearreceta", "saveimg"];
+    public $authexcept = ["index", "view", "saveimg"];
 
 
     public function indexProvider()
@@ -58,6 +58,7 @@ class RecetasController extends BaseController
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
         $model = Recetas::findOne($id);
+
         if (!$model) { //No existe
             throw new NotFoundHttpException('No existe esa receta');
         } else {
