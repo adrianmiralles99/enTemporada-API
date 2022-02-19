@@ -14,7 +14,7 @@ use app\models\Usuarios;
 class ProductoController extends BaseController
 {
     public $modelClass = "app\models\Producto";
-    public $authexcept = ["index", "cosita"];
+    public $authexcept = ["index", "view"];
 
 
     public function actions()
@@ -35,10 +35,4 @@ class ProductoController extends BaseController
         ]);
     }
 
-    public function actionCosita()
-    {
-        $uid = Usuarios::findOne(2)->id;
-        var_dump($uid);
-        return null;
-    }
 }

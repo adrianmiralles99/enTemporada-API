@@ -15,7 +15,7 @@ use app\models\Usuarios;
 class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
-    public $authexcept = ["index", "view", "saveimg"];
+    public $authexcept = ["index", "view"];
 
 
     public function indexProvider()
@@ -69,6 +69,25 @@ class RecetasController extends BaseController
             if ($model->save()) {
                 $response = Yii::$app->getResponse();
                 $response->setStatusCode(201);
+            }
+            return $model;
+        }
+    }
+
+    public function actionDeletereceta($id)
+    {
+        // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
+        $uid = Yii::$app->user->identity->id;
+        $model = Recetas::findOne($id);
+
+        if (!$model) { //No existe
+            throw new NotFoundHttpException('No existe esa receta');
+        } else {
+            if ($uid != $model->id_usuario) //No es mío
+                throw new NotFoundHttpException('Acceso no permitido');
+
+            if ($model->delete()) {
+                return "Receta borrada correctamente";
             }
             return $model;
         }

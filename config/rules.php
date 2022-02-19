@@ -27,6 +27,30 @@ return  [
             'OPTIONS crearreceta' => 'crearreceta',
             'PUT updatereceta' => 'updatereceta',
             'OPTIONS updatereceta' => 'updatereceta',
+            'DELETE deletereceta' => 'deletereceta',
+            'OPTIONS deletereceta' => 'deletereceta',
+        ]
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['likes'],
+        'pluralize' => false,
+        'extraPatterns' => [
+            'POST setlike' => 'setlike',
+            'OPTIONS setlike' => 'setlike',
+            'DELETE deletelike' => 'deletelike',
+            'OPTIONS deletelike' => 'deletelike',
+        ]
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['favoritos'],
+        'pluralize' => false,
+        'extraPatterns' => [
+            'POST setfavorito' => 'setfavorito',
+            'OPTIONS setfavorito' => 'setfavorito',
+            'DELETE deletefavorito' => 'deletefavorito',
+            'OPTIONS deletefavorito' => 'deletefavorito',
         ]
     ],
 
