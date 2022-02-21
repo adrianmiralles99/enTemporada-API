@@ -14,7 +14,7 @@ use app\controllers\BaseController;
 class FavoritosController extends BaseController
 {
     public $modelClass = 'app\models\Favoritos';
-    public $authexcept = ["index"];
+    public $authexcept = ["index", "view"];
 
     public function indexProvider()
     {
@@ -33,7 +33,7 @@ class FavoritosController extends BaseController
         return $actions;
     }
 
-    public function actionSetfavorito()
+    public function actionCreatefavorito()
     {
         $model = new Favoritos();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');

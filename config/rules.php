@@ -36,8 +36,8 @@ return  [
         'controller' => ['likes'],
         'pluralize' => false,
         'extraPatterns' => [
-            'POST setlike' => 'setlike',
-            'OPTIONS setlike' => 'setlike',
+            'POST createlike' => 'createlike',
+            'OPTIONS createlike' => 'createlike',
             'DELETE deletelike' => 'deletelike',
             'OPTIONS deletelike' => 'deletelike',
         ]
@@ -47,8 +47,8 @@ return  [
         'controller' => ['favoritos'],
         'pluralize' => false,
         'extraPatterns' => [
-            'POST setfavorito' => 'setfavorito',
-            'OPTIONS setfavorito' => 'setfavorito',
+            'POST createfavorito' => 'createfavorito',
+            'OPTIONS createfavorito' => 'createfavorito',
             'DELETE deletefavorito' => 'deletefavorito',
             'OPTIONS deletefavorito' => 'deletefavorito',
         ]

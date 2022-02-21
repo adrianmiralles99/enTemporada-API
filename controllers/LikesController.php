@@ -14,7 +14,7 @@ use app\controllers\BaseController;
 class LikesController extends BaseController
 {
     public $modelClass = 'app\models\Likes';
-    public $authexcept = ["index"];
+    public $authexcept = ["index", "view"];
 
     public function indexProvider()
     {
@@ -33,7 +33,7 @@ class LikesController extends BaseController
         return $actions;
     }
 
-    public function actionSetlike()
+    public function actionCreatelike()
     {
         $model = new Likes();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');

@@ -89,7 +89,6 @@ class Producto extends \yii\db\ActiveRecord
     }
 
 
-
     public function extraFields()
     {
         return ["relacionadas", "calendario"];
