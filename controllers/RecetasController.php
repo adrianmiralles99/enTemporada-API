@@ -43,8 +43,7 @@ class RecetasController extends BaseController
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         $model->estado = "P";
-        // $model->ingredientes = json_encode($model->ingredientes);
-        // $model->pasos = json_encode($model->pasos);
+        $model->id_usuario = Yii::$app->user->identity->id;
 
         if ($model->save()) {
             return $model;
@@ -83,6 +82,7 @@ class RecetasController extends BaseController
         if (!$model) { //No existe
             throw new NotFoundHttpException('No existe esa receta');
         } else {
+
             if ($uid != $model->id_usuario) //No es mío
                 throw new NotFoundHttpException('Acceso no permitido');
 

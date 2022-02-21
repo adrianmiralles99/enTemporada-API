@@ -41,8 +41,7 @@ class UserController extends BaseController
         $model = new Usuarios();
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-        // var_dump($model);
-        return $model;
+
         $model->tipo = "U";
         $model->estado = "P";
         $model->exp = 0;
