@@ -187,4 +187,8 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return self::$tipoUsuarios[$this->tipo];
     }
+    public function extraFields()
+    {
+        return ["recetas"];
+    }
 }

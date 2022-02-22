@@ -92,4 +92,10 @@ class RecetasController extends BaseController
             return $model;
         }
     }
+    public function actionGetrecetauser(){
+        $uid = Yii::$app->user->identity->id;
+        echo $uid;
+        $model =Recetas::find()->where(["id_usuario"=>$uid])->orderBy('id');
+        return $model;
+    }
 }
