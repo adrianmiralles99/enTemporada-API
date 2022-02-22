@@ -33,9 +33,9 @@ class Favoritos extends \yii\db\ActiveRecord
         return [
             [['id_usuario', 'id_receta'], 'required'],
             [['id_usuario', 'id_receta'], 'integer'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
-            [['id_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::className(), 'targetAttribute' => ['id_receta' => 'id']],
-            [['id_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::className(), 'targetAttribute' => ['id_receta' => 'id']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::class, 'targetAttribute' => ['id_receta' => 'id']],
+            [['id_receta'], 'exist', 'skipOnError' => true, 'targetClass' => Recetas::class, 'targetAttribute' => ['id_receta' => 'id']],
         ];
     }
 
@@ -58,7 +58,7 @@ class Favoritos extends \yii\db\ActiveRecord
      */
     public function getReceta()
     {
-        return $this->hasOne(Recetas::className(), ['id' => 'id_receta']);
+        return $this->hasOne(Recetas::class, ['id' => 'id_receta']);
     }
 
 
@@ -69,11 +69,11 @@ class Favoritos extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuarios::class, ['id' => 'id_usuario']);
     }
 
     public function extraFields()
     {
-        return ['receta','usuario'];
+        return ['receta', 'usuario'];
     }
 }
