@@ -27,8 +27,6 @@ return  [
             'OPTIONS crearreceta' => 'crearreceta',
             'PUT updatereceta' => 'updatereceta',
             'OPTIONS updatereceta' => 'updatereceta',
-            'GET recetauser' => 'recetauser',
-            'OPTIONS recetauser' => 'recetauser',
             'GET ultimareceta' => 'ultimareceta',
             'OPTIONS ultimareceta' => 'ultimareceta',
             'GET popularreceta' => 'popularreceta',
@@ -67,7 +65,7 @@ return  [
             'OPTIONS deletefavorito' => 'deletefavorito',
         ]
     ],
-    
+
 
 
 

@@ -97,7 +97,7 @@ class Recetas extends \yii\db\ActiveRecord
      */
     public function getLikes()
     {
-        return $this->hasMany(Likes::class, ['id_receta' => 'id'])->where("id_usuario");
+        return $this->hasMany(Likes::class, ['id_receta' => 'id']);
     }
 
     /**
@@ -120,7 +120,6 @@ class Recetas extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::class, ['id' => 'id_usuario']);
     }
 
-
     public function getNick()
     {
         return Yii::$app->db->createcommand("select nick, imagen from usuarios where id= '$this->id_usuario' ")->queryOne();
@@ -138,8 +137,13 @@ class Recetas extends \yii\db\ActiveRecord
 
     public function extraFields()
     {
-        return ["nick", "totallikes", "totalfavoritos"];
+        return ["nick", "totallikes", "totalfavoritos", "likes", "usuario"];
     }
+
+    // public function fields()
+    // {
+    //     return ['id', 'usuarios'];
+    // }
 
     public function afterFind()
     {

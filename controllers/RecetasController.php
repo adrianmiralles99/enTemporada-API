@@ -7,7 +7,6 @@ use app\models\Recetas;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
-use app\models\Usuarios;
 
 /**
  * RecetasController implements the CRUD actions for Recetas model.
@@ -20,9 +19,21 @@ class RecetasController extends BaseController
 
     public function indexProvider()
     {
-        $model = Yii::$app->db->createcommand("select recetas.*, u.nick, u.imagen as 'usuario_img' from recetas join usuarios as u
-        where  id_usuario= u.id;")->queryAll();
-        return $model;
+
+        // $model = Yii::$app->db->createcommand("select recetas.*, u.nick, u.imagen as 'usuario_img',
+        // (select count(*) as total from likes where id_receta=recetas.id) as totallikes,
+        // (select count(*) as total from favoritos where id_receta=recetas.id) as totallfavoritos
+        // from recetas join usuarios as u
+        // where recetas.estado='A' and id_usuario= u.id;")->queryAll();
+
+        // $model = Recetas::find()->select("usuarios.tipo,usuarios.nick,recetas.pasos, recetas.ingredientes")
+        //     ->innerJoin("usuarios", "usuarios.id = recetas.id_usuario")->where("recetas.id=3")->with("usuarios")->all();
+        // return $model;
+
+        return new ActiveDataProvider([
+            'query' => Recetas::find()->orderBy('id'),
+            'pagination' => false
+        ]);
     }
 
 
@@ -91,12 +102,6 @@ class RecetasController extends BaseController
             return $model;
         }
     }
-    public function actionRecetauser()
-    {
-        $uid = Yii::$app->user->identity->id;
-        echo $uid;
-        $model = Recetas::find()->where(["id_usuario" => $uid])->orderBy('id');
-    }
 
     public function actionGetfav()
     {
@@ -132,7 +137,7 @@ class RecetasController extends BaseController
         (select id_receta from likes where id_receta in 
         (select id from recetas where id_usuario=$uid)
         group by id_receta order by count(*) desc limit 1);")->queryOne();
-        
+
         return $model;
     }
 }
