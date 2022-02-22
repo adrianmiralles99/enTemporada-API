@@ -27,6 +27,8 @@ return  [
             'OPTIONS crearreceta' => 'crearreceta',
             'PUT updatereceta' => 'updatereceta',
             'OPTIONS updatereceta' => 'updatereceta',
+            'GET recetauser' => 'recetauser',
+            'OPTIONS recetauser' => 'recetauser',
             'DELETE deletereceta' => 'deletereceta',
             'OPTIONS deletereceta' => 'deletereceta',
         ]

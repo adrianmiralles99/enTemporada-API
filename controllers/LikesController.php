@@ -18,10 +18,22 @@ class LikesController extends BaseController
 
     public function indexProvider()
     {
-        return new ActiveDataProvider([
-            'query' => Likes::find()->orderBy('id'),
-            'pagination' => false
-        ]);
+        $uid = Yii::$app->user->isGuest;
+        var_dump($uid);
+        if( Yii::$app->user->identity ){
+            
+            return new ActiveDataProvider([
+                'query' => Likes::find()->where(["id_usuario"=> $uid])->orderBy('id'),
+                'pagination' => false
+            ]);
+        }else{
+            echo("hi");
+            return new ActiveDataProvider([
+                'query' => Likes::find()->orderBy('id'),
+                'pagination' => false
+            ]);
+        }
+       
     }
 
     public function actions()

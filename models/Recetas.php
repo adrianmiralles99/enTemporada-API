@@ -123,7 +123,7 @@ class Recetas extends \yii\db\ActiveRecord
 
     public function getNick()
     {
-        return Yii::$app->db->createcommand("select nick from usuarios where id= '$this->id_usuario' ")->queryOne();
+        return Yii::$app->db->createcommand("select nick, imagen from usuarios where id= '$this->id_usuario' ")->queryOne();
     }
 
     public function extraFields()
