@@ -29,6 +29,8 @@ return  [
             'OPTIONS updatereceta' => 'updatereceta',
             'GET recetauser' => 'recetauser',
             'OPTIONS recetauser' => 'recetauser',
+            'GET getfav' => 'getfav',
+            'OPTIONS getfav' => 'getfav',
             'DELETE deletereceta' => 'deletereceta',
             'OPTIONS deletereceta' => 'deletereceta',
         ]
@@ -53,10 +55,13 @@ return  [
         'extraPatterns' => [
             'POST createfavorito' => 'createfavorito',
             'OPTIONS createfavorito' => 'createfavorito',
+            'GET getfavoritos' => 'getfavoritos',
+            'OPTIONS getfavoritos' => 'getfavoritos',
             'DELETE deletefavorito' => 'deletefavorito',
             'OPTIONS deletefavorito' => 'deletefavorito',
         ]
     ],
+    
 
 
 

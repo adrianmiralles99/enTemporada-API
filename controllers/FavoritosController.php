@@ -65,4 +65,9 @@ class FavoritosController extends BaseController
             return $model;
         }
     }
+    public function actionGetfavoritos(){
+        $uid = Yii::$app->user->identity->id;
+        $model = Favoritos::find()->where(['id_usuario' => $uid])->all();
+        return $model;
+    }
 }

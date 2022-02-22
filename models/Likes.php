@@ -71,6 +71,6 @@ class Likes extends \yii\db\ActiveRecord
 
     public function extraFields()
     {
-        return ["receta"];
+        return ['receta','usuario'];
     }
 }
