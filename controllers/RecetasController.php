@@ -21,7 +21,7 @@ class RecetasController extends BaseController
     public function indexProvider()
     {
         return new ActiveDataProvider([
-            'query' => Recetas::find()->orderBy('id'),
+            'query' => Recetas::find()->OrderBy('id'),
             'pagination' => false
         ]);
     }
@@ -91,5 +91,13 @@ class RecetasController extends BaseController
             }
             return $model;
         }
+    }
+
+    public function actionGetfav(){
+        $uid = Yii::$app->user->identity->id;
+        $model = Yii::$app->db->createcommand("select recetas.*, u.nick  from recetas join usuarios as u 
+        where recetas.id_usuario = u.id and recetas.id in 
+        (select id_receta from favoritos where id_usuario = $uid)")->queryAll();
+        return $model;
     }
 }

@@ -30,6 +30,7 @@ class BaseController extends \yii\rest\ActiveController
                 'Access-Control-Allow-Credentials' => false,
                 'Access-Control-Max-Age' => 86400
             ],
+            
         ];
         if (!$this->authenable)
             return $behaviors;

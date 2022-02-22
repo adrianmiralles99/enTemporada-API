@@ -18,10 +18,20 @@ class LikesController extends BaseController
 
     public function indexProvider()
     {
+        if (Yii::$app->user->id) {
+            $uid = Yii::$app->user->id;
+            return new ActiveDataProvider([
+            
+                'query' => Likes::find()->where(['id_usuario' => $uid])->orderBy('id'),
+                'pagination' => false
+            ]);
+        }else{
         return new ActiveDataProvider([
+            
             'query' => Likes::find()->orderBy('id'),
             'pagination' => false
         ]);
+    }
     }
 
     public function actions()
@@ -64,5 +74,10 @@ class LikesController extends BaseController
             }
             return $model;
         }
+    }
+    public function actionGetlikes(){
+        $uid = Yii::$app->user->identity->id;
+        $model = Likes::find()->where(['id_usuario' => $uid])->all();
+        return $model;
     }
 }

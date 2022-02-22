@@ -61,15 +61,6 @@ class Favoritos extends \yii\db\ActiveRecord
         return $this->hasOne(Recetas::className(), ['id' => 'id_receta']);
     }
 
-    /**
-     * Gets query for [[Receta0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getReceta0()
-    {
-        return $this->hasOne(Recetas::className(), ['id' => 'id_receta']);
-    }
 
     /**
      * Gets query for [[Usuario]].
@@ -79,5 +70,10 @@ class Favoritos extends \yii\db\ActiveRecord
     public function getUsuario()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'id_usuario']);
+    }
+
+    public function extraFields()
+    {
+        return ['receta','usuario'];
     }
 }
