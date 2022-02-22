@@ -49,6 +49,7 @@ class UserController extends BaseController
         $model->token = md5(date("Y-m-d") . $model->id);
         $model->fecha_cad = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
         $model->imagen = "default.gif";
+        $model->id_ultima_receta = 0;
 
 
         if ($model->save()) {

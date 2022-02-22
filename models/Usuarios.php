@@ -130,9 +130,9 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRecetas0()
+    public function getUltimareceta()
     {
-        return $this->hasMany(Recetas::class, ['id_usuario' => 'id']);
+        return $this->hasOne(Recetas::class, ['id_usuario' => 'id_ultima_receta']);
     }
 
     public static function findByUsername($username)
@@ -189,6 +189,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
     public function extraFields()
     {
-        return ["recetas"];
+        return ["recetas", "ultimareceta"];
     }
 }
