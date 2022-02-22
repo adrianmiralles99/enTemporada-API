@@ -110,6 +110,11 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return $this->hasMany(Likes::class, ['id_usuario' => 'id']);
     }
 
+    public function getNumLikes()
+    {
+        return $this->hasMany(Likes::class, ['id_usuario' => 'id']);
+    }
+
     /**
      * Gets query for [[Recetas]].
      *

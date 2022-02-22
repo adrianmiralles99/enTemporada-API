@@ -45,6 +45,11 @@ class UserController extends BaseController
         $model->tipo = "U";
         $model->estado = "P";
         $model->exp = 0;
+        $model->password = md5($model->password);
+        $model->token = md5(date("Y-m-d") . $model->id);
+        $model->fecha_cad = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
+        $model->imagen = "default.gif";
+
 
         if ($model->save()) {
             return $model;

@@ -7,6 +7,7 @@ use app\models\Likes;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
+use app\models\Usuarios;
 
 /**
  * LikesController implements the CRUD actions for Likes model.
@@ -64,5 +65,11 @@ class LikesController extends BaseController
             }
             return $model;
         }
+    }
+
+    public function actionGetlikes()
+    {
+        $model = Likes::find()->where(["id_receta" => 2])->all();
+        return $model;
     }
 }

@@ -38,6 +38,8 @@ return  [
         'extraPatterns' => [
             'POST createlike' => 'createlike',
             'OPTIONS createlike' => 'createlike',
+            'GET getlikes' => 'getlikes',
+            'OPTIONS getlikes' => 'getlikes',
             'DELETE deletelike' => 'deletelike',
             'OPTIONS deletelike' => 'deletelike',
         ]
