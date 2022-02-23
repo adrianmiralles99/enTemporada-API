@@ -48,6 +48,9 @@ class LikesController extends BaseController
     {
         $model = new Likes();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        $uid = Yii::$app->user->identity->id;
+        $model->id_usuario = $uid;
+
         $existe = Likes::find()->where(["id_receta" => $model->id_receta, "id_usuario" => $model->id_usuario])->one();
         // POR SI ACASO SE PRUEBA A SPAMEAR EL BOTON DE LIKES
         if (!$existe) {

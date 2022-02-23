@@ -37,6 +37,8 @@ class FavoritosController extends BaseController
     {
         $model = new Favoritos();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        $uid = Yii::$app->user->identity->id;
+        $model->id_usuario = $uid;
         $existe = Favoritos::find()->where(["id_receta" => $model->id_receta, "id_usuario" => $model->id_usuario])->one();
 
         if (!$existe) {
