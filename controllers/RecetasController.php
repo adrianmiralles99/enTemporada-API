@@ -22,7 +22,7 @@ class RecetasController extends BaseController
     public function indexProvider()
     {
         return new ActiveDataProvider([
-            'query' => Recetas::find()->orderBy('id'),
+            'query' => Recetas::find()->where(["estado"=>"A"])->orderBy('id'),
             'pagination' => false
         ]);
     }

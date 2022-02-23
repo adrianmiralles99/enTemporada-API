@@ -37,24 +37,27 @@ class FavoritosController extends BaseController
     {
         $model = new Favoritos();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        $existe = Favoritos::find()->where(["id_receta" => $model->id_receta, "id_usuario" => $model->id_usuario])->one();
 
-        if ($model->save()) {
-            return $model;
-        } else {
-            return ["error" => $model->getErrors()];
+        if (!$existe) {
+            if ($model->save()) {
+                return $model;
+            } else {
+                return ["error" => $model->getErrors()];
+            }
         }
     }
 
-    public function actionDeletefavorito($id)
+    public function actionDeletefavorito($id_receta)
     {
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
-        $model = Favoritos::findOne($id);
+        $model = Favoritos::find()->where(["id_receta" => $id_receta, "id_usuario" => $uid])->one();
 
         // En realidad las comprobaciones de si es mio o no, no serían necesarias,
         // solo la de si existe
         if (!$model) { //No existe
-            throw new NotFoundHttpException('No existe esa receta');
+            throw new NotFoundHttpException('No existe ese favorito');
         } else {
             if ($uid != $model->id_usuario) //No es mío
                 throw new NotFoundHttpException('Acceso no permitido');
@@ -65,7 +68,8 @@ class FavoritosController extends BaseController
             return $model;
         }
     }
-    public function actionGetfavoritos(){
+    public function actionGetfavoritos()
+    {
         $uid = Yii::$app->user->identity->id;
         $model = Favoritos::find()->where(['id_usuario' => $uid])->all();
         return $model;

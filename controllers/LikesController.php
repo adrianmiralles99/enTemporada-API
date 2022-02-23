@@ -22,17 +22,17 @@ class LikesController extends BaseController
         if (Yii::$app->user->id) {
             $uid = Yii::$app->user->id;
             return new ActiveDataProvider([
-            
+
                 'query' => Likes::find()->where(['id_usuario' => $uid])->orderBy('id'),
                 'pagination' => false
             ]);
-        }else{
-        return new ActiveDataProvider([
-            
-            'query' => Likes::find()->orderBy('id'),
-            'pagination' => false
-        ]);
-    }
+        } else {
+            return new ActiveDataProvider([
+
+                'query' => Likes::find()->orderBy('id'),
+                'pagination' => false
+            ]);
+        }
     }
 
     public function actions()
@@ -48,24 +48,27 @@ class LikesController extends BaseController
     {
         $model = new Likes();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-
-        if ($model->save()) {
-            return $model;
-        } else {
-            return ["error" => $model->getErrors()];
+        $existe = Likes::find()->where(["id_receta" => $model->id_receta, "id_usuario" => $model->id_usuario])->one();
+        // POR SI ACASO SE PRUEBA A SPAMEAR EL BOTON DE LIKES
+        if (!$existe) {
+            if ($model->save()) {
+                return $model;
+            } else {
+                return ["error" => $model->getErrors()];
+            }
         }
     }
 
-    public function actionDeletelike($id)
+    public function actionDeletelike($id_receta)
     {
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
-        $model = Likes::findOne($id);
+        $model = Likes::find()->where(["id_receta" => $id_receta, "id_usuario" => $uid])->one();
 
         // En realidad las comprobaciones de si es mio o no, no serían necesarias,
         // solo la de si existe
         if (!$model) { //No existe
-            throw new NotFoundHttpException('No existe esa receta');
+            throw new NotFoundHttpException('No existe ese Like');
         } else {
             if ($uid != $model->id_usuario) //No es mío
                 throw new NotFoundHttpException('Acceso no permitido');
@@ -76,7 +79,8 @@ class LikesController extends BaseController
             return $model;
         }
     }
-    public function actionGetlikes(){
+    public function actionGetlikes()
+    {
         $uid = Yii::$app->user->identity->id;
         $model = Likes::find()->where(['id_usuario' => $uid])->all();
         return $model;
