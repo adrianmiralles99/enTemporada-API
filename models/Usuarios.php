@@ -135,6 +135,16 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return $this->hasOne(Recetas::class, ['id_usuario' => 'id_ultima_receta']);
     }
 
+    public function getTotallikes()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from likes where id_usuario='$this->id'")->queryOne();
+    }
+
+    public function getTotalfavoritos()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from favoritos where id_usuario='$this->id'")->queryOne();
+    }
+
     public static function findByUsername($username)
     {
         return static::findOne(['nick' => $username]);
@@ -189,6 +199,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
     public function extraFields()
     {
-        return ["recetas", "ultimareceta"];
+        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos"];
     }
 }
