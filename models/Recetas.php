@@ -29,7 +29,6 @@ use Yii;
 class Recetas extends \yii\db\ActiveRecord
 {
 
-
     /**
      * {@inheritdoc}
      */
@@ -137,13 +136,8 @@ class Recetas extends \yii\db\ActiveRecord
 
     public function extraFields()
     {
-        return ["nick", "totallikes", "totalfavoritos", "likes", "usuario"];
+        return ["nick", "totallikes", "totalfavoritos", "likes", "favoritos", "usuario"];
     }
-
-    // public function fields()
-    // {
-    //     return ['id', 'usuarios'];
-    // }
 
     public function afterFind()
     {
