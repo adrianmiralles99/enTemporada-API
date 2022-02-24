@@ -149,6 +149,10 @@ class RecetasController extends BaseController
             if ($uid != $model->id_usuario) //No es mío
                 throw new NotFoundHttpException('Acceso no permitido');
 
+            $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
+            if (file_exists($path . $model->imagen)) {
+                unlink($path . $model->imagen);
+            }
             if ($model->delete()) {
                 return "Receta borrada correctamente";
             }
