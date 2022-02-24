@@ -5,10 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Likes;
 use app\models\Recetas;
+use app\models\Favoritos;
+use yii\web\UploadedFile;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
-use app\models\Favoritos;
 
 /**
  * RecetasController implements the CRUD actions for Recetas model.
@@ -46,7 +47,16 @@ class RecetasController extends BaseController
         $model->estado = "P";
         $model->id_usuario = Yii::$app->user->identity->id;
 
+        $fileUpload = UploadedFile::getInstanceByName('eventImage');
+
+        if (!empty($fileUpload)) {
+            $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
+        }
+
         if ($model->save()) {
+            $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
+            $fileUpload->saveAs($path . $model->imagen);
+
             return $model;
         } else {
             return ["error" => $model->getErrors()];
@@ -66,7 +76,20 @@ class RecetasController extends BaseController
                 throw new NotFoundHttpException('Acceso no permitido');
 
             $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+            $fileUpload = UploadedFile::getInstanceByName('eventImage');
+            if (!empty($fileUpload)) {
+                $lastImagen =  $model->imagen;
+                $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
+            }
             if ($model->save()) {
+                $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
+                // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
+                if (!empty($fileUpload) && file_exists($path . $lastImagen)) {
+                    unlink($path . $lastImagen);
+                    $fileUpload->saveAs($path . $model->imagen);
+                }
+                // SUBIMOS LA IMAGEN
+
                 $response = Yii::$app->getResponse();
                 $response->setStatusCode(201);
             }
