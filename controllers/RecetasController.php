@@ -22,7 +22,7 @@ class RecetasController extends BaseController
     public function indexProvider()
     {
         return new ActiveDataProvider([
-            'query' => Recetas::find()->where(["estado"=>"A"])->orderBy('id'),
+            'query' => Recetas::find()->where(["estado" => "A"])->orderBy('id'),
             'pagination' => false
         ]);
     }
@@ -74,25 +74,7 @@ class RecetasController extends BaseController
         }
     }
 
-    public function actionDeletereceta($id)
-    {
-        // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
-        $uid = Yii::$app->user->identity->id;
-        $model = Recetas::findOne($id);
 
-        if (!$model) { //No existe
-            throw new NotFoundHttpException('No existe esa receta');
-        } else {
-
-            if ($uid != $model->id_usuario) //No es mío
-                throw new NotFoundHttpException('Acceso no permitido');
-
-            if ($model->delete()) {
-                return "Receta borrada correctamente";
-            }
-            return $model;
-        }
-    }
 
     public function actionGetfav()
     {
@@ -122,11 +104,32 @@ class RecetasController extends BaseController
         $uid = Yii::$app->user->identity->id;
         $model = Yii::$app->db->createcommand("
         select recetas.*, u.nick, u.imagen as 'usuario_img' from recetas join usuarios as u 
-        where recetas.id_usuario=u.id and recetas.id=
-        (select id_receta from likes where id_receta in 
+        where recetas.id_usuario=u.id and 
+        recetas.id= (select id_receta from likes where id_receta in 
         (select id from recetas where id_usuario=$uid)
         group by id_receta order by count(*) desc limit 1);")->queryOne();
 
         return $model;
+    }
+
+    public function actionDeletereceta($id)
+    {
+        // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
+        $uid = Yii::$app->user->identity->id;
+        $model = Recetas::findOne($id);
+
+        // En realidad las comprobaciones de si es mio o no, no serían necesarias,
+        // solo la de si existe
+        if (!$model) { //No existe
+            throw new NotFoundHttpException('No existe esa receta');
+        } else {
+            if ($uid != $model->id_usuario) //No es mío
+                throw new NotFoundHttpException('Acceso no permitido');
+
+            if ($model->delete()) {
+                return "Receta borrada correctamente";
+            }
+            return $model;
+        }
     }
 }

@@ -36,6 +36,7 @@ use app\models\Favoritos;
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     static $tipoUsuarios = ["U" => "Usuario",  "A" => "Administrdor"];
+    public $eventImage;
 
     /**
      * {@inheritdoc}
@@ -60,6 +61,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             [['nick'], 'string', 'max' => 12],
             [['correo', 'direccion'], 'string', 'max' => 50],
             [['password'], 'string', 'max' => 32],
+            [['eventImage'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -137,12 +139,21 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public function getTotallikes()
     {
-        return Yii::$app->db->createcommand("select count(*) as total from likes where id_usuario='$this->id'")->queryOne();
+        return Yii::$app->db->createcommand("select count(*) as total from likes where id_receta in (select id from recetas where id_usuario='$this->id')")->queryOne();
     }
 
-    public function getTotalfavoritos()
+    public function getTotalguardadas()
     {
         return Yii::$app->db->createcommand("select count(*) as total from favoritos where id_usuario='$this->id'")->queryOne();
+    }
+    public function getTotalfavoritos()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from favoritos where id_receta in (select id from recetas where id_usuario='$this->id')")->queryOne();
+    }
+
+    public function getTotalrecetas()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from recetas where id_usuario='$this->id'")->queryOne();
     }
 
     public static function findByUsername($username)
@@ -197,9 +208,9 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return self::$tipoUsuarios[$this->tipo];
     }
-    
+
     public function extraFields()
     {
-        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos"];
+        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos", "totalrecetas", "totalguardadas"];
     }
 }

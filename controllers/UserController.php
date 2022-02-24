@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Usuarios;
+use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
 
@@ -29,7 +30,7 @@ class UserController extends BaseController
             // $password = $_POST['password'] ?? "";
 
             if ($u = \app\models\Usuarios::findOne(['nick' => $username]))
-                if ($u->password == md5($password)) { //o crypt, según esté en la BD
+                if ($u->estado == "A" && $u->password == md5($password)) { //o crypt, según esté en la BD
                     return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre];
                 }
             return ['error' => 'Usuario incorrecto. ' . $username];
@@ -48,7 +49,7 @@ class UserController extends BaseController
         $model->password = md5($model->password);
         $model->token = md5(date("Y-m-d") . $model->id);
         $model->fecha_cad = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
-        $model->imagen = "default.gif";
+        $model->imagen = "default.png";
         $model->id_ultima_receta = 0;
 
 
@@ -64,11 +65,26 @@ class UserController extends BaseController
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
         $model = Usuarios::findOne($id);
+
         if ($uid != $model->id) //No es mío
             throw new NotFoundHttpException('Acceso no permitido');
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        $lastImagen = $model->imagen;
+        $fileUpload = UploadedFile::getInstanceByName('eventImage');
+
+        if (!empty($fileUpload)) {
+            $model->imagen = "IMG_USER_" . rand() . "." . $fileUpload->extension;
+        }
         if ($model->save()) {
+            $path = realpath(dirname(getcwd())) . '/../../assets/IMG/Usuarios/';
+            // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
+            if (!empty($fileUpload) && file_exists($path . $lastImagen)) {
+                unlink($path . $lastImagen);
+                // SUBIMOS LA IMAGEN
+                $fileUpload->saveAs($path . $model->imagen);
+            }
+
             $response = Yii::$app->getResponse();
             $response->setStatusCode(201);
         }
