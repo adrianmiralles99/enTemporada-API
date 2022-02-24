@@ -81,7 +81,7 @@ class RecetasController extends BaseController
             $model->load(Yii::$app->getRequest()->getBodyParams(), '');
             $model->id_prodp = intval($model->id_prodp);
             $model->comensales = intval($model->comensales);
-            
+
             $fileUpload = UploadedFile::getInstanceByName('eventImage');
             if (!empty($fileUpload)) {
                 $lastImagen =  $model->imagen;
