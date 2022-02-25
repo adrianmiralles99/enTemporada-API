@@ -25,6 +25,8 @@ return  [
         'extraPatterns' => [
             'POST crearreceta' => 'crearreceta',
             'OPTIONS crearreceta' => 'crearreceta',
+            'GET bytipo' => 'bytipo',
+            'OPTIONS bytipo' => 'bytipo',
             'PUT updatereceta' => 'updatereceta',
             'OPTIONS updatereceta' => 'updatereceta',
             'GET ultimareceta' => 'ultimareceta',

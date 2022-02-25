@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\Recetas;
+use app\models\Calendario;
 
 /**
  * This is the model class for table "producto".

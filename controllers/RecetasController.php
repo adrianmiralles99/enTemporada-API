@@ -17,7 +17,7 @@ use app\controllers\BaseController;
 class RecetasController extends BaseController
 {
     public $modelClass = 'app\models\Recetas';
-    public $authexcept = ["index", "view"];
+    public $authexcept = ["index", "view", "bytipo"];
 
 
     public function indexProvider()
@@ -83,15 +83,18 @@ class RecetasController extends BaseController
             $model->comensales = intval($model->comensales);
 
             $fileUpload = UploadedFile::getInstanceByName('eventImage');
+            $lastImagen =  $model->imagen;
             if (!empty($fileUpload)) {
-                $lastImagen =  $model->imagen;
                 $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
             }
             if ($model->save()) {
                 $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
                 // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
-                if (!empty($fileUpload) && file_exists($path . $lastImagen)) {
+                if (file_exists($path . $lastImagen) && !empty($fileUpload)) {
                     unlink($path . $lastImagen);
+                }
+
+                if (!empty($fileUpload)) {
                     $fileUpload->saveAs($path . $model->imagen);
                 }
                 // SUBIMOS LA IMAGEN
@@ -164,5 +167,23 @@ class RecetasController extends BaseController
             }
             return $model;
         }
+    }
+
+    public function actionBytipo($tipo = null, $fecha = null)
+    {
+        if ($tipo) {
+            $model = Recetas::find()->where(["tipo" => $tipo, "estado" => "A"])->all();
+            if (!$model) {
+                $model = Recetas::find()->all();
+            }
+            return $model;
+        }
+        if ($fecha) {
+            $model = Recetas::find()->where(["estado" => "A"])->orderBy("fecha DESC")->all();
+            return $model;
+        }
+
+        $model = Recetas::find()->all();
+        return $model;
     }
 }
