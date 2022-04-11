@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
 
 /**
- * RecetasController implements the CRUD actions for Recetas model.
+ * RecetasController implements the CRUD actions for Recetas model.a
  */
 class RecetasController extends BaseController
 {
@@ -69,6 +69,7 @@ class RecetasController extends BaseController
     public function actionUpdatereceta($id)
     {
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
+        
         $uid = Yii::$app->user->identity->id;
         $model = Recetas::findOne($id);
 
@@ -79,6 +80,7 @@ class RecetasController extends BaseController
                 throw new NotFoundHttpException('Acceso no permitido');
 
             $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+          
             $model->id_prodp = intval($model->id_prodp);
             $model->comensales = intval($model->comensales);
 

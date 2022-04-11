@@ -155,7 +155,24 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return Yii::$app->db->createcommand("select count(*) as total from recetas where id_usuario='$this->id'")->queryOne();
     }
-
+    /*--------------------------ENTRADAS----------------*/
+    public function getTotallikesentrada()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from likes_entrada where id_entrada in (select id from entradas where id_usuario='$this->id')")->queryOne();
+    }
+    public function getTotalguardadasentrada()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from favoritos_entrada where id_usuario='$this->id'")->queryOne();
+    }
+    public function getTotalfavoritosentrada()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from favoritos_entrada where id_entrada in (select id from entradas where id_usuario='$this->id')")->queryOne();
+    }
+    public function getTotalentradas()
+    {
+        return Yii::$app->db->createcommand("select count(*) as total from entradas where id_usuario='$this->id'")->queryOne();
+    }
+    /*------FIN-------*/
     public static function findByUsername($username)
     {
         return static::findOne(['nick' => $username]);
@@ -211,6 +228,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public function extraFields()
     {
-        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos", "totalrecetas", "totalguardadas"];
+        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos", "totalrecetas", "totalguardadas", "totallikesentrada", "totalfavoritosentrada", "totalrecetas", "totalguardadasentrada"];
     }
 }
