@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\FavoritosEntrada;
+use app\models\Favoritosentrada;
 
 /**
- * FavoritosEntradaSearch represents the model behind the search form of `app\models\FavoritosEntrada`.
+ * FavoritosentradaSearch represents the model behind the search form of `app\models\Favoritosentrada`.
  */
-class FavoritosEntradaSearch extends FavoritosEntrada
+class FavoritosentradaSearch extends Favoritosentrada
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class FavoritosEntradaSearch extends FavoritosEntrada
      */
     public function search($params)
     {
-        $query = FavoritosEntrada::find();
+        $query = Favoritosentrada::find();
 
         // add conditions that should always apply here
 

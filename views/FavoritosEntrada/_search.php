@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\FavoritosEntradaSearch */
+/* @var $model app\models\FavoritosentradaSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="favoritos-entrada-search">
+<div class="favoritosentrada-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

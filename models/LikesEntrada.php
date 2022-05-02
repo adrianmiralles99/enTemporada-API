@@ -14,9 +14,9 @@ use Yii;
  * @property Entradas $entrada
  * @property Usuarios $usuario
  */
-class LikesEntrada extends \yii\db\ActiveRecord
+class Likesentrada extends \yii\db\ActiveRecord
 {
-    /**
+     /**
      * {@inheritdoc}
      */
     public static function tableName()

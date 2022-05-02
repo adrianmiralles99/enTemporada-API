@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\FavoritosEntrada */
+/* @var $model app\models\Favoritosentrada */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Favoritos Entradas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Favoritosentradas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="favoritos-entrada-view">
+<div class="favoritosentrada-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

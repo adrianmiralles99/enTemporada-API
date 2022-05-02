@@ -18,8 +18,8 @@ use Yii;
  *
  * @property Categorias $categoria
  * @property Comentarios[] $comentarios
- * @property FavoritosEntrada[] $favoritosEntradas
- * @property LikesEntrada[] $likesEntradas
+ * @property Favoritosentrada[] $favoritosentradas
+ * @property Likesentrada[] $likesentradas
  * @property Usuarios $usuario
  */
 class Entradas extends \yii\db\ActiveRecord
@@ -45,7 +45,7 @@ class Entradas extends \yii\db\ActiveRecord
             [['id_usuario', 'id_categoria'], 'integer'],
             [['fecha'], 'safe'],
             [['estado', 'texto'], 'string'],
-            [['titulo'], 'string', 'max' => 50],
+            [['titulo'], 'string', 'max' => 75],
             [['imagen'], 'string', 'max' => 40],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::className(), 'targetAttribute' => ['id_categoria' => 'id']],
@@ -92,23 +92,23 @@ class Entradas extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[FavoritosEntradas]].
+     * Gets query for [[Favoritosentradas]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getFavoritos()
     {
-        return $this->hasMany(FavoritosEntrada::className(), ['id_entrada' => 'id']);
+        return $this->hasMany(Favoritosentrada::className(), ['id_entrada' => 'id']);
     }
 
     /**
-     * Gets query for [[LikesEntradas]].
+     * Gets query for [[Likesentrada]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getLikes()
     {
-        return $this->hasMany(LikesEntrada::class, ['id_entrada' => 'id']);
+        return $this->hasMany(Likesentrada::class, ['id_entrada' => 'id']);
     }
 
     public function getTotallikes()

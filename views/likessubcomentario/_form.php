@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\LikesSubcomentario */
+/* @var $model app\models\Likessubcomentario */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="likes-subcomentario-form">
+<div class="likessubcomentario-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

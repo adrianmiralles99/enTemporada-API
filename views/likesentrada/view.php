@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\LikesEntrada */
+/* @var $model app\models\Likesentrada */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Likes Entradas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Likesentradas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="likes-entrada-view">
+<div class="likesentrada-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

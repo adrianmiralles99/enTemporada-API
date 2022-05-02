@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Likessubcomentario;
+use app\models\Reportes;
 
 /**
- * LikessubcomentarioSearch represents the model behind the search form of `app\models\Likessubcomentario`.
+ * ReportesSearch represents the model behind the search form of `app\models\Reportes`.
  */
-class LikessubcomentarioSearch extends Likessubcomentario
+class ReportesSearch extends Reportes
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,8 @@ class LikessubcomentarioSearch extends Likessubcomentario
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_subcomentario'], 'integer'],
+            [['id', 'id_usuario', 'id_usuarioreportado', 'id_comentario'], 'integer'],
+            [['tipo_comentario', 'motivo', 'fecha'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class LikessubcomentarioSearch extends Likessubcomentario
      */
     public function search($params)
     {
-        $query = Likessubcomentario::find();
+        $query = Reportes::find();
 
         // add conditions that should always apply here
 
@@ -59,8 +60,13 @@ class LikessubcomentarioSearch extends Likessubcomentario
         $query->andFilterWhere([
             'id' => $this->id,
             'id_usuario' => $this->id_usuario,
-            'id_subcomentario' => $this->id_subcomentario,
+            'id_usuarioreportado' => $this->id_usuarioreportado,
+            'id_comentario' => $this->id_comentario,
+            'fecha' => $this->fecha,
         ]);
+
+        $query->andFilterWhere(['like', 'tipo_comentario', $this->tipo_comentario])
+            ->andFilterWhere(['like', 'motivo', $this->motivo]);
 
         return $dataProvider;
     }

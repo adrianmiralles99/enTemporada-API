@@ -8,7 +8,7 @@ use app\models\Comentarios;
 use yii\filters\VerbFilter;
 //
 use app\models\EntradasSearch;
-use app\models\FavoritosEntrada;
+use app\models\Favoritosentrada;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
@@ -44,10 +44,11 @@ class EntradasController extends BaseController
     public function actionCrearentrada()
     {
         $model = new Entradas();
+    
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
         $model->estado = "P";
         $model->id_usuario = Yii::$app->user->identity->id;
-
         $fileUpload = UploadedFile::getInstanceByName('eventImage');
         $model->id_categoria = intval($model->id_categoria);
 
@@ -58,7 +59,6 @@ class EntradasController extends BaseController
          if ($model->save()) {
             $path = realpath(dirname(getcwd())) . '/../../assets/IMG/entradas/';
             $fileUpload->saveAs($path . $model->imagen);
-
             return $model;
         } else {
             return ["error" => $model->getErrors()];
@@ -85,7 +85,7 @@ class EntradasController extends BaseController
                 $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
             }
             if ($model->save()) {
-                $path = realpath(dirname(getcwd())) . '../../assets/IMG/entradas/';
+                $path = realpath(dirname(getcwd())) . '/../../assets/IMG/entradas/';
                 // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
                 if (file_exists($path . $lastImagen) && !empty($fileUpload)) {
                     unlink($path . $lastImagen);
@@ -234,7 +234,7 @@ class EntradasController extends BaseController
     public function actionGetfav()
     {
         $uid = Yii::$app->user->identity->id;
-        $model = Entradas::find()->where(["in", "id", FavoritosEntrada::find()->select('id_receta')->where(['id_usuario' => $uid])])->all();
+        $model = Entradas::find()->where(["in", "id", Favoritosentrada::find()->select('id_entrada')->where(['id_usuario' => $uid])])->all();
         return $model;
     }
 

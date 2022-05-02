@@ -1,29 +1,30 @@
 <?php
 
 namespace app\controllers;
-
 use Yii;
+
+use app\models\Likessubcomentario;
+use app\models\LikessubcomentarioSearch;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
-use app\models\LikesSubcomentario;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use app\controllers\BaseController;
-use app\models\LikesSubcomentarioSearch;
+use yii\data\ActiveDataProvider;
+
 
 /**
- * LikessubcomentarioController implements the CRUD actions for LikesSubcomentario model.
+ * LikessubcomentarioController implements the CRUD actions for Likessubcomentario model.
  */
 class LikessubcomentarioController extends BaseController
 {
-    public $modelClass = 'app\models\LikesSubcomentario';
+    public $modelClass = 'app\models\Likessubcomentario';
     public $authexcept = ["index", "view"];
 
     public function indexProvider()
     {
         return new ActiveDataProvider([
 
-            'query' => LikesSubcomentario::find()->orderBy('id'),
+            'query' => Likessubcomentario::find()->orderBy('id'),
             'pagination' => false
         ]);
         
@@ -41,11 +42,11 @@ class LikessubcomentarioController extends BaseController
    
     public function actionCreatelike()
     {
-        $model = new LikesSubcomentario();
+        $model = new Likessubcomentario();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         $uid = Yii::$app->user->identity->id;
         $model->id_usuario = $uid;
-        $existe = LikesSubcomentario::find()->where(["id_subcomentario" => $model->id_subcomentario, "id_usuario" => $model->id_usuario])->one();
+        $existe = Likessubcomentario::find()->where(["id_subcomentario" => $model->id_subcomentario, "id_usuario" => $model->id_usuario])->one();
        
         // POR SI ACASO SE PRUEBA A SPAMEAR EL BOTON DE LIKES
         if (!$existe) {
@@ -61,7 +62,7 @@ class LikessubcomentarioController extends BaseController
       
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
-        $model = LikesSubcomentario::find()->where(["id_subcomentario" => $id_subcomentario, "id_usuario" => $uid])->one();
+        $model = Likessubcomentario::find()->where(["id_subcomentario" => $id_subcomentario, "id_usuario" => $uid])->one();
         // En realidad las comprobaciones de si es mio o no, no serían necesarias,
         // solo la de si existe
         if (!$model) { //No existe
@@ -82,7 +83,7 @@ class LikessubcomentarioController extends BaseController
     {
         
         //$uid = Yii::$app->user->identity->id;
-        $model = LikesSubcomentario::find()->orderBy('id');
+        $model = Likessubcomentario::find()->orderBy('id');
         var_dump($model);
         return $model;
     }*/

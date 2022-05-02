@@ -14,9 +14,9 @@ use Yii;
  * @property Subcomentarios $subcomentario
  * @property Subcomentarios $usuario
  */
-class LikesSubcomentario extends \yii\db\ActiveRecord
+class Likessubcomentario extends \yii\db\ActiveRecord
 {
-    /**
+      /**
      * {@inheritdoc}
      */
     public static function tableName()

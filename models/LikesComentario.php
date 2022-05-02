@@ -14,7 +14,7 @@ use Yii;
  * @property Comentarios $comentario
  * @property Usuarios $usuario
  */
-class LikesComentario extends \yii\db\ActiveRecord
+class Likescomentario extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

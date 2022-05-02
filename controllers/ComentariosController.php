@@ -58,6 +58,7 @@ class ComentariosController extends BaseController
         //die();
         $model->estado = "V";
         $model->id_usuario = Yii::$app->user->identity->id;
+        $model->id_entrada = intval($model->id_entrada);
 
          if ($model->save()) {
             return $model;

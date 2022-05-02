@@ -6,18 +6,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\LikescomentarioSearch */
+/* @var $searchModel app\models\ReportesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Likescomentarios';
+$this->title = 'Reportes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="likescomentario-index">
+<div class="reportes-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Likescomentario', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Reportes', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,10 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'id_usuario',
+            'id_usuarioreportado',
             'id_comentario',
+            'tipo_comentario',
+            //'motivo:ntext',
+            //'fecha',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Likescomentario $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Reportes $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

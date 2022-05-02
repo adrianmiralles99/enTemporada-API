@@ -1,27 +1,29 @@
 <?php
 
 namespace app\controllers;
-
-
 use Yii;
-use app\models\LikesComentario;
-use app\models\LikesComentarioSearch;
+
+use app\models\Likescomentario;
+use app\models\LikescomentarioSearch;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
+
 /**
- * LikesComentarioController implements the CRUD actions for LikesComentario model.
+ * LikescomentarioController implements the CRUD actions for Likescomentario model.
  */
 class LikescomentarioController extends BaseController
 {
-    public $modelClass = 'app\models\LikesComentario';
+    public $modelClass = 'app\models\Likescomentario';
     public $authexcept = ["index", "view"];
 
     public function indexProvider()
     {
         return new ActiveDataProvider([
 
-            'query' => LikesComentario::find()->orderBy('id'),
+            'query' => Likescomentario::find()->orderBy('id'),
             'pagination' => false
         ]);
         
@@ -39,12 +41,12 @@ class LikescomentarioController extends BaseController
    
     public function actionCreatelike()
     {
-        $model = new LikesComentario();
+        $model = new Likescomentario();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         $uid = Yii::$app->user->identity->id;
         $model->id_usuario = $uid;
 
-        $existe = LikesComentario::find()->where(["id_comentario" => $model->id_comentario, "id_usuario" => $model->id_usuario])->one();
+        $existe = Likescomentario::find()->where(["id_comentario" => $model->id_comentario, "id_usuario" => $model->id_usuario])->one();
      
         // POR SI ACASO SE PRUEBA A SPAMEAR EL BOTON DE LIKES
         if (!$existe) {
@@ -60,7 +62,7 @@ class LikescomentarioController extends BaseController
 
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
-        $model = LikesComentario::find()->where(["id_comentario" => $id_comentario, "id_usuario" => $uid])->one();
+        $model = Likescomentario::find()->where(["id_comentario" => $id_comentario, "id_usuario" => $uid])->one();
 
         // En realidad las comprobaciones de si es mio o no, no serían necesarias,
         // solo la de si existe
@@ -81,7 +83,7 @@ class LikescomentarioController extends BaseController
     {
         
         //$uid = Yii::$app->user->identity->id;
-        $model = LikesComentario::find()->orderBy('id');
+        $model = Likescomentario::find()->orderBy('id');
         var_dump($model);
         return $model;
     }*/

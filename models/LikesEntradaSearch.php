@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\LikesEntrada;
+use app\models\Likesentrada;
 
 /**
- * LikesentradaSearch represents the model behind the search form of `app\models\LikesEntrada`.
+ * LikesentradaSearch represents the model behind the search form of `app\models\Likesentrada`.
  */
-class LikesentradaSearch extends LikesEntrada
+class LikesentradaSearch extends Likesentrada
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class LikesentradaSearch extends LikesEntrada
      */
     public function search($params)
     {
-        $query = LikesEntrada::find();
+        $query = Likesentrada::find();
 
         // add conditions that should always apply here
 

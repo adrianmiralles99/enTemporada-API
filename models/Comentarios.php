@@ -15,7 +15,7 @@ use Yii;
  * @property string $fecha
  *
  * @property Entradas $entrada
- * @property LikesComentario[] $likesComentarios
+ * @property Likescomentario[] $likesComentarios
  * @property Subcomentarios[] $subcomentarios
  * @property Usuarios $usuario
  */
@@ -76,7 +76,7 @@ class Comentarios extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[LikesComentarios]].
+     * Gets query for [[Likescomentario]].
      *
      * @return \yii\db\ActiveQuery
      */
@@ -86,7 +86,7 @@ class Comentarios extends \yii\db\ActiveRecord
     }
     public function getLikes()
     {
-        return $this->hasMany(LikesComentario::className(), ['id_comentario' => 'id']);
+        return $this->hasMany(Likescomentario::className(), ['id_comentario' => 'id']);
     }
     public function getTotalsubcomentarios(){
         return Yii::$app->db->createcommand("select count(*) as total from subcomentarios where id_comentarioprinc= '$this->id' ")->queryOne();

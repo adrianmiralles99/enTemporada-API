@@ -14,7 +14,8 @@ use Yii;
  * @property Entradas $entrada
  * @property Usuarios $usuario
  */
-class FavoritosEntrada extends \yii\db\ActiveRecord
+class Favoritosentrada extends \yii\db\ActiveRecord
+
 {
     /**
      * {@inheritdoc}

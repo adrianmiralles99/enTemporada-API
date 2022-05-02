@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\LikesSubcomentario */
+/* @var $model app\models\Likessubcomentario */
 
-$this->title = 'Update Likes Subcomentario: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Likes Subcomentarios', 'url' => ['index']];
+$this->title = 'Update Likessubcomentario: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Likessubcomentarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="likes-subcomentario-update">
+<div class="likessubcomentario-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

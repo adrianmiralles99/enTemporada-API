@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\LikesComentario */
+/* @var $model app\models\Likescomentario */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Likes Comentarios', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Likescomentarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="likes-comentario-view">
+<div class="likescomentario-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

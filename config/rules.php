@@ -3,7 +3,7 @@ return  [
     [
         'class' => 'yii\rest\UrlRule',
         'pluralize' => false,
-        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', "prodactuales", "entradas","categorias", "likesentrada", "favoritosentrada","comentarios", "subcomentarios", "likescomentario","likessubcomentario"],
+        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', "prodactuales", "entradas","categorias", "likesentrada", "favoritosentrada","comentarios", "subcomentarios", "likescomentario","likessubcomentario","reportes"],
     ],
     [
         'class' => 'yii\rest\UrlRule',
@@ -166,6 +166,15 @@ return  [
             'OPTIONS crearsubcomentario' => 'crearsubcomentario',
             'PUT ocultarsubcomentario' => 'ocultarsubcomentario',
             'OPTIONS ocultarsubcomentario' => 'ocultarsubcomentario',
+        ]
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['reportes'],
+        'pluralize' => false,
+        'extraPatterns' => [
+            'POST crearreporte' => 'crearreporte',
+            'OPTIONS crearreporte' => 'crearreporte',
         ]
     ],
 

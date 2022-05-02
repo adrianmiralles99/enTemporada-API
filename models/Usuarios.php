@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\models\Likes;
 use app\models\Recetas;
+use app\models\Entradas;
 use app\models\Favoritos;
 
 /**
@@ -26,7 +27,7 @@ use app\models\Favoritos;
  * @property string|null $fecha_cad
  * @property int|null $exp
  * @property int|null $id_ultima_receta
- *
+ * @property int|null $id_ultima_entrada
  * @property Favoritos[] $favoritos
  * @property Likes[] $likes
  * @property Recetas[] $recetas
@@ -35,7 +36,7 @@ use app\models\Favoritos;
 
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    static $tipoUsuarios = ["U" => "Usuario",  "A" => "Administrdor"];
+    static $tipoUsuarios = ["U" => "Usuario",  "A" => "Administrador"];
     public $eventImage;
 
     /**
@@ -55,7 +56,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             [['nombre', 'apellidos', 'nick', 'correo', 'password', 'localidad', 'direccion', 'tipo', 'estado'], 'required'],
             [['descripcion', 'tipo', 'estado'], 'string'],
             [['fecha_cad', 'imagen'], 'safe'],
-            [['exp', 'id_ultima_receta'], 'integer'],
+            [['exp', 'id_ultima_receta', 'id_ultima_entrada'], 'integer'],
             [['nombre', 'localidad'], 'string', 'max' => 20],
             [['apellidos', 'imagen', 'token'], 'string', 'max' => 40],
             [['nick'], 'string', 'max' => 12],
@@ -89,6 +90,8 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             'fecha_cad' => 'Fecha Cad',
             'exp' => 'Exp',
             'id_ultima_receta' => 'Id Ultima Receta',
+            'id_ultima_entrada' => 'Id Ultima Entrada',
+
         ];
     }
 
@@ -156,6 +159,12 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return Yii::$app->db->createcommand("select count(*) as total from recetas where id_usuario='$this->id'")->queryOne();
     }
     /*--------------------------ENTRADAS----------------*/
+    public function getUltimaentrada()
+    {
+        return $this->hasOne(Entradas::class, ['id_usuario' => 'id_ultima_entrada']);
+    }
+
+
     public function getTotallikesentrada()
     {
         return Yii::$app->db->createcommand("select count(*) as total from likes_entrada where id_entrada in (select id from entradas where id_usuario='$this->id')")->queryOne();
@@ -170,7 +179,9 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
     public function getTotalentradas()
     {
+        //return Yii::$app->db->createcommand("select count(*) as total from entradas where id_usuario='$this->id'")->queryOne();
         return Yii::$app->db->createcommand("select count(*) as total from entradas where id_usuario='$this->id'")->queryOne();
+
     }
     /*------FIN-------*/
     public static function findByUsername($username)
@@ -228,6 +239,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public function extraFields()
     {
-        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos", "totalrecetas", "totalguardadas", "totallikesentrada", "totalfavoritosentrada", "totalrecetas", "totalguardadasentrada"];
+        return ["recetas", "ultimareceta", "totallikes", "totalfavoritos", "totalrecetas", "totalguardadas","ultimaentrada","totallikesentrada", "totalfavoritosentrada", "totalentradas", "totalguardadasentrada"];
     }
 }

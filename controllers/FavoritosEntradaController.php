@@ -2,25 +2,23 @@
 
 namespace app\controllers;
 use Yii;
-use app\models\FavoritosEntrada;
+use app\models\Favoritosentrada;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
-use app\models\FavoritosEntradaSearch;
+use app\models\FavoritosentradaSearch;
 use yii\data\ActiveDataProvider;
-
-
 /**
- * FavoritosEntradaController implements the CRUD actions for FavoritosEntrada model.
+ * FavoritosentradaController implements the CRUD actions for FavoritosEntrada model.
  */
 class FavoritosentradaController extends BaseController
 {
-    public $modelClass = 'app\models\FavoritosEntrada';
+    public $modelClass = 'app\models\Favoritosentrada';
     public $authexcept = ["index", "view"];
 
     public function indexProvider()
     {
         return new ActiveDataProvider([
-            'query' => FavoritosEntrada::find()->orderBy('id'),
+            'query' => Favoritosentrada::find()->orderBy('id'),
             'pagination' => false
         ]);
     }
@@ -37,12 +35,12 @@ class FavoritosentradaController extends BaseController
     public function actionCreatefavorito()
     {
 
-        $model = new FavoritosEntrada();
+        $model = new Favoritosentrada();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         
         $uid = Yii::$app->user->identity->id;
         $model->id_usuario = $uid;
-        $existe = FavoritosEntrada::find()->where(["id_entrada" => $model->id_entrada, "id_usuario" => $model->id_usuario])->one();
+        $existe = Favoritosentrada::find()->where(["id_entrada" => $model->id_entrada, "id_usuario" => $model->id_usuario])->one();
 
         if (!$existe) {
             if ($model->save()) {
@@ -58,7 +56,7 @@ class FavoritosentradaController extends BaseController
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
     
         $uid = Yii::$app->user->identity->id;
-        $model = FavoritosEntrada::find()->where(["id_entrada" => $id_entrada, "id_usuario" => $uid])->one();
+        $model = Favoritosentrada::find()->where(["id_entrada" => $id_entrada, "id_usuario" => $uid])->one();
 
         // En realidad las comprobaciones de si es mio o no, no serían necesarias,
         // solo la de si existe
@@ -77,7 +75,7 @@ class FavoritosentradaController extends BaseController
     public function actionGetfavoritos()
     {
         $uid = Yii::$app->user->identity->id;
-        $model = FavoritosEntrada::find()->where(['id_usuario' => $uid])->all();
+        $model = Favoritosentrada::find()->where(['id_usuario' => $uid])->all();
         return $model;
     }
 }

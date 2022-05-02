@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\LikesComentario;
+use app\models\Likescomentario;
 
 /**
- * LikesComentarioSearch represents the model behind the search form of `app\models\LikesComentario`.
+ * LikescomentarioSearch represents the model behind the search form of `app\models\Likescomentario`.
  */
-class LikesComentarioSearch extends LikesComentario
+class LikescomentarioSearch extends Likescomentario
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class LikesComentarioSearch extends LikesComentario
      */
     public function search($params)
     {
-        $query = LikesComentario::find();
+        $query = Likescomentario::find();
 
         // add conditions that should always apply here
 

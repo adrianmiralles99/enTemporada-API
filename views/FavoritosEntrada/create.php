@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\FavoritosEntrada */
+/* @var $model app\models\Favoritosentrada */
 
-$this->title = 'Create Favoritos Entrada';
-$this->params['breadcrumbs'][] = ['label' => 'Favoritos Entradas', 'url' => ['index']];
+$this->title = 'Create Favoritosentrada';
+$this->params['breadcrumbs'][] = ['label' => 'Favoritosentradas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="favoritos-entrada-create">
+<div class="favoritosentrada-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

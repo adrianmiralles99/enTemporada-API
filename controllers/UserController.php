@@ -51,6 +51,7 @@ class UserController extends BaseController
         $model->fecha_cad = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
         $model->imagen = "default.png";
         $model->id_ultima_receta = 0;
+        $model->id_ultima_entrada = 0;
 
 
         if ($model->save()) {
@@ -82,9 +83,10 @@ class UserController extends BaseController
             if (!empty($fileUpload) && file_exists($path . $lastImagen)) {
                 unlink($path . $lastImagen);
                 // SUBIMOS LA IMAGEN
-                $fileUpload->saveAs($path . $model->imagen);
-            }
+                //$fileUpload->saveAs($path . $model->imagen);
 
+            }
+            $fileUpload->saveAs($path . $model->imagen);
             $response = Yii::$app->getResponse();
             $response->setStatusCode(201);
         }

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\LikesComentarioSearch */
+/* @var $model app\models\LikescomentarioSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="likes-comentario-search">
+<div class="likescomentario-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

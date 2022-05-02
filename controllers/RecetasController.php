@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\controllers\BaseController;
 
+
 /**
  * RecetasController implements the CRUD actions for Recetas model.a
  */
@@ -51,20 +52,20 @@ class RecetasController extends BaseController
 
         $model->id_prodp = intval($model->id_prodp);
         $model->comensales = intval($model->comensales);
-
+        
         if (!empty($fileUpload)) {
             $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
         }
-
         if ($model->save()) {
             $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
             $fileUpload->saveAs($path . $model->imagen);
-
+            
             return $model;
         } else {
             return ["error" => $model->getErrors()];
         }
     }
+    
 
     public function actionUpdatereceta($id)
     {
@@ -86,11 +87,14 @@ class RecetasController extends BaseController
 
             $fileUpload = UploadedFile::getInstanceByName('eventImage');
             $lastImagen =  $model->imagen;
+            echo "ey";
+            die();
             if (!empty($fileUpload)) {
                 $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
             }
             if ($model->save()) {
                 $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
+               
                 // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
                 if (file_exists($path . $lastImagen) && !empty($fileUpload)) {
                     unlink($path . $lastImagen);
