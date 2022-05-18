@@ -33,6 +33,9 @@ class UserController extends BaseController
                 if ($u->estado == "A" && $u->password == md5($password)) { //o crypt, según esté en la BD
                     return ['token' => $u->token, 'id' => $u->id, 'nombre' => $u->nombre];
                 }
+                if ($u->estado == "B"){
+                    return ['error' => 'Usuario bloqueado. ' . $username];
+                }
             return ['error' => 'Usuario incorrecto. ' . $username];
         }
     }
@@ -63,6 +66,7 @@ class UserController extends BaseController
 
     public function actionUpdateuser($id)
     {
+        
         // Hacemos lo queramos y devolvemos información con return (un array, un objeto...)
         $uid = Yii::$app->user->identity->id;
         $model = Usuarios::findOne($id);
@@ -79,17 +83,34 @@ class UserController extends BaseController
         }
         if ($model->save()) {
             $path = realpath(dirname(getcwd())) . '/../../assets/IMG/Usuarios/';
+            //$path = realpath(dirname(getcwd())) . '/../assets/IMG/Usuarios/';
+
             // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
             if (!empty($fileUpload) && file_exists($path . $lastImagen)) {
                 unlink($path . $lastImagen);
                 // SUBIMOS LA IMAGEN
                 //$fileUpload->saveAs($path . $model->imagen);
+                $fileUpload->saveAs($path . $model->imagen);
 
             }
-            $fileUpload->saveAs($path . $model->imagen);
             $response = Yii::$app->getResponse();
             $response->setStatusCode(201);
         }
         return $model;
+    }
+    public function actionSumarexperiencia($id, $puntos){
+        $uid = Yii::$app->user->identity->id;
+        $model = Usuarios::findOne($id);
+        $experiencia = $model->exp + $puntos;
+        if ($uid != $model->id){ //No es mío
+             throw new NotFoundHttpException('Acceso no permitido');
+        }
+        if ($experiencia > 500){
+            $model->exp = 500;
+        }else{
+            $model->exp = $experiencia;
+        }
+       $model->save();
+       return $model;
     }
 }

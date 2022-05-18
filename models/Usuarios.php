@@ -183,6 +183,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return Yii::$app->db->createcommand("select count(*) as total from entradas where id_usuario='$this->id'")->queryOne();
 
     }
+    
     /*------FIN-------*/
     public static function findByUsername($username)
     {

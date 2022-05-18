@@ -87,14 +87,14 @@ class RecetasController extends BaseController
 
             $fileUpload = UploadedFile::getInstanceByName('eventImage');
             $lastImagen =  $model->imagen;
-            echo "ey";
-            die();
+            
             if (!empty($fileUpload)) {
                 $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
             }
             if ($model->save()) {
+                //$path = realpath(dirname(getcwd())) . '/../assets/IMG/recetas/';
                 $path = realpath(dirname(getcwd())) . '/../../assets/IMG/recetas/';
-               
+
                 // LA LINEA DE ABAJO SIRVE PARA BORRAR EN CASO DE TENER NOMBRES DIFERENTES
                 if (file_exists($path . $lastImagen) && !empty($fileUpload)) {
                     unlink($path . $lastImagen);

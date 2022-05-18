@@ -3,7 +3,7 @@ return  [
     [
         'class' => 'yii\rest\UrlRule',
         'pluralize' => false,
-        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', "prodactuales", "entradas","categorias", "likesentrada", "favoritosentrada","comentarios", "subcomentarios", "likescomentario","likessubcomentario","reportes"],
+        'controller' => ['user', 'calendario', 'favoritos', 'likes', 'recetas', 'producto', "prodactuales", "entradas","categorias", "likesentrada", "favoritosentrada","comentarios", "subcomentarios", "likescomentario","likessubcomentario","reportes", "notificaciones"],
     ],
     [
         'class' => 'yii\rest\UrlRule',
@@ -16,6 +16,8 @@ return  [
             'OPTIONS register' => 'register',
             'PUT updateuser' => 'updateuser',
             'OPTIONS updateuser' => 'updateuser',
+            'PUT sumarexperiencia' => 'sumarexperiencia',
+            'OPTIONS sumarexperiencia' => 'sumarexperiencia',
         ]
     ],
     [
@@ -177,7 +179,19 @@ return  [
             'OPTIONS crearreporte' => 'crearreporte',
         ]
     ],
-
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['notificaciones'],
+        'pluralize' => false,
+        'extraPatterns' => [
+            'POST crearnotificacion' => 'crearnotificacion',
+            'OPTIONS crearnotificacion' => 'crearnotificacion',
+            'DELETE deletenotificacion' => 'deletenotificacion',
+            'OPTIONS deletenotificacion' => 'deletenotificacion',
+            'GET getmias' => 'getmias',
+            'OPTIONS getmias' => 'getmias',
+        ]
+    ],
 
 
 
