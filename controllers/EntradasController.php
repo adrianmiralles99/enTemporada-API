@@ -51,7 +51,12 @@ class EntradasController extends BaseController
         $model->id_usuario = Yii::$app->user->identity->id;
         $fileUpload = UploadedFile::getInstanceByName('eventImage');
         $model->id_categoria = intval($model->id_categoria);
-
+        
+        var_dump($fileUpload);
+        echo "<br>";
+        echo ($fileUpload);
+        echo "<br>";
+        die();
         if (!empty($fileUpload)) {
             $model->imagen = "IMG_REC_" . rand() . "." . $fileUpload->extension;
         }
@@ -78,7 +83,7 @@ class EntradasController extends BaseController
 
             $model->load(Yii::$app->getRequest()->getBodyParams(), '');
             $model->id_categoria = intval($model->id_categoria);
-
+            $model->estado = "P";
             $fileUpload = UploadedFile::getInstanceByName('eventImage');
             $lastImagen =  $model->imagen;
             if (!empty($fileUpload)) {
